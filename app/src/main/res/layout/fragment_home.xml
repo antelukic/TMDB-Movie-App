@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Toolbar
+                android:id="@+id/home_header_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dark_blue_primary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/header_top_margin"
+                    android:layout_marginBottom="@dimen/header_bottom_margin"
+                    android:scaleType="center"
+                    android:src="@drawable/tmdb_logo" />
+            </Toolbar>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/home_searchbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin_all"
+                android:textColorHint="@color/dark_blue_primary"
+                android:theme="@style/TextInputLayoutAppearance"
+                app:boxCornerRadiusBottomEnd="@dimen/common_card_radius"
+                app:boxCornerRadiusBottomStart="@dimen/common_card_radius"
+                app:boxCornerRadiusTopEnd="@dimen/common_card_radius"
+                app:boxCornerRadiusTopStart="@dimen/common_card_radius"
+                app:boxStrokeColor="@android:color/transparent"
+                app:boxStrokeWidth="@dimen/box_stroke_width"
+                app:boxStrokeWidthFocused="@dimen/box_stroke_width"
+                app:hintTextColor="@color/dark_blue_primary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_header_card"
+                app:startIconDrawable="@drawable/ic_magnifier"
+                app:startIconTint="@color/dark_blue_primary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/search"
+                    android:maxLines="1"
+                    android:textSize="@dimen/text_size_small" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/home_whatsnew_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin_top"
+                android:layout_marginEnd="@dimen/text_margin_end"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:text="@string/what_s_popular"
+                android:textColor="@color/dark_blue_primary"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/home_searchbox"
+                app:layout_constraintTop_toBottomOf="@id/home_searchbox" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/home_popular_tabs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tab_margin_top"
+                android:layout_marginEnd="@dimen/tab_margin_end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/home_whatsnew_text"
+                app:layout_constraintTop_toBottomOf="@id/home_whatsnew_text"
+                app:tabGravity="center"
+                app:tabIndicatorColor="@color/dark_blue_primary"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/dark_blue_primary"
+                app:tabTextAppearance="@style/TabTextAppearance"
+                app:tabTextColor="@color/gray">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/streaming" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/on_tv" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/for_rent" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/in_theaters" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_popular_rv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/rv_margin_top"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/home_popular_tabs"
+                app:layout_constraintTop_toBottomOf="@id/home_popular_tabs" />
+
+            <TextView
+                android:id="@+id/home_freetowatch_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin_top_big"
+                android:layout_marginEnd="@dimen/text_margin_end"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:text="@string/free_to_watch"
+                android:textColor="@color/dark_blue_primary"
+                android:textSize="@dimen/text_size_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/home_popular_rv"
+                app:layout_constraintTop_toBottomOf="@id/home_popular_rv" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/home_free_tabs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tab_margin_top"
+                android:layout_marginEnd="@dimen/tab_margin_end"
+                app:layout_constraintStart_toStartOf="@id/home_freetowatch_text"
+                app:layout_constraintTop_toBottomOf="@id/home_freetowatch_text"
+                app:tabGravity="center"
+                app:tabIndicatorColor="@color/dark_blue_primary"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/dark_blue_primary"
+                app:tabTextAppearance="@style/TabTextAppearance"
+                app:tabTextColor="@color/gray">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/movies" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv" />
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_free_rv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/rv_margin_top"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/home_free_tabs"
+                app:layout_constraintTop_toBottomOf="@id/home_free_tabs" />
+
+            <TextView
+                android:id="@+id/home_trending_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin_top_big"
+                android:layout_marginEnd="@dimen/text_margin_end"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:text="@string/trending"
+                android:textColor="@color/dark_blue_primary"
+                android:textSize="@dimen/text_size_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/home_free_rv"
+                app:layout_constraintTop_toBottomOf="@id/home_free_rv" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/home_trending_tabs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/tab_margin_top"
+                android:layout_marginEnd="@dimen/tab_margin_end"
+                app:layout_constraintStart_toStartOf="@id/home_trending_text"
+                app:layout_constraintTop_toBottomOf="@id/home_trending_text"
+                app:tabGravity="center"
+                app:tabIndicatorColor="@color/dark_blue_primary"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/dark_blue_primary"
+                app:tabTextAppearance="@style/TabTextAppearance"
+                app:tabTextColor="@color/gray">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/today" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/this_week" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_trending_rv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/rv_margin_top"
+                android:layout_marginBottom="@dimen/rv_margin_bottom"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/home_trending_tabs"
+                app:layout_constraintTop_toBottomOf="@id/home_trending_tabs" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
