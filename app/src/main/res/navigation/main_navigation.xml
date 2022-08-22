@@ -9,5 +9,21 @@
         android:id="@+id/homePageFragment"
         android:name="com.lukic.movieapp.HomeFragment"
         android:label="fragment_home_page"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_homePageFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.lukic.movieapp.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details">
+
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 </navigation>
