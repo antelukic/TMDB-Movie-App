@@ -8,30 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.lukic.movieapp.R
 import com.lukic.movieapp.databinding.FragmentDetailsBinding
-import com.lukic.movieapp.di.ObjectGraph
 import com.lukic.movieapp.ui.adapters.CastAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val INDICATOR_ANIMATION_DURATION = 1000L
 
 class DetailsFragment : Fragment() {
 
-    private val detailsViewModel by viewModels<DetailsViewModel> {
-        object : ViewModelProvider.NewInstanceFactory() {
-
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return DetailsViewModel(ObjectGraph.queryMovieByID) as T
-            }
-        }
-    }
+    private val detailsViewModel by viewModel<DetailsViewModel>()
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding: FragmentDetailsBinding get() = _binding!!

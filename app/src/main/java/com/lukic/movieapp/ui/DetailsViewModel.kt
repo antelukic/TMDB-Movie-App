@@ -1,12 +1,9 @@
 package com.lukic.movieapp.ui
 
 import androidx.lifecycle.ViewModel
-import com.lukic.movieapp.domain.model.Movie
-import com.lukic.movieapp.domain.usecase.QueryUseCaseWithParam
+import com.lukic.movieapp.domain.usecase.QueryMovieByID
 
-class DetailsViewModel(
-    private val queryMovieByIDUseCase: QueryUseCaseWithParam<String, Movie?>
-) : ViewModel() {
+class DetailsViewModel(private val queryMovieByIDUseCase: QueryMovieByID) : ViewModel() {
 
     var uiState: MovieDetailsUIState? = null
 

@@ -1,12 +1,9 @@
 package com.lukic.movieapp.ui
 
 import androidx.lifecycle.ViewModel
-import com.lukic.movieapp.domain.model.Movie
-import com.lukic.movieapp.domain.usecase.QueryUseCase
+import com.lukic.movieapp.domain.usecase.QueryAllMovies
 
-class HomeViewModel(
-    private val getAllMovies: QueryUseCase<List<Movie>>
-) : ViewModel() {
+class HomeViewModel(private val getAllMovies: QueryAllMovies) : ViewModel() {
 
     var movieUIState: List<HomeMovieUIState> = listOf()
 

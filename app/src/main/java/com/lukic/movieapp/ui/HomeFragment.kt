@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.lukic.movieapp.databinding.FragmentHomeBinding
-import com.lukic.movieapp.di.ObjectGraph
 import com.lukic.movieapp.ui.adapters.MovieAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
+private const val DETAILS_IMAGE_ID = "details_image"
 
 class HomeFragment : Fragment() {
 
@@ -20,15 +19,7 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = _binding!!
-    private val homeViewModel by viewModels<HomeViewModel> {
-        object : ViewModelProvider.NewInstanceFactory() {
-
-            @Suppress("UNCHECKED_CAST")
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return HomeViewModel(ObjectGraph.queryAllMovies) as T
-            }
-        }
-    }
+    private val homeViewModel by viewModel<HomeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,7 +55,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun onItemClick(id: String, view: View) {
-        val extras = FragmentNavigatorExtras(view to "details_image")
+        val extras = FragmentNavigatorExtras(view to DETAILS_IMAGE_ID)
         findNavController().navigate(
             HomeFragmentDirections.actionHomeFragmentToDetailsFragment(id),
             extras
