@@ -1,4 +1,4 @@
-package com.lukic.movieapp.adapters
+package com.lukic.movieapp.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +7,13 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lukic.movieapp.Movie
+import coil.load
 import com.lukic.movieapp.databinding.ItemMovieBinding
+import com.lukic.movieapp.ui.HomeMovieUIState
 
-class MovieRecyclerAdapter(
+class MovieAdapter(
     private val onClick: (String, View) -> Unit
-) : ListAdapter<Movie, MovieRecyclerAdapter.MovieViewHolder>(MovieDiffCallback()) {
+) : ListAdapter<HomeMovieUIState, MovieAdapter.MovieViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,21 +27,25 @@ class MovieRecyclerAdapter(
     inner class MovieViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(movie: Movie) {
+        fun bind(movie: HomeMovieUIState) {
             with(binding) {
-                movieImage.setOnClickListener {
-                    onClick(movie.title, it)
+                with(movieImage) {
+                    setOnClickListener { view ->
+                        onClick(movie.movieID, view)
+                    }
+                    ViewCompat.setTransitionName(this, movie.movieID)
+                    load(movie.movieThumbnail)
                 }
-                ViewCompat.setTransitionName(movieImage, movie.title)
             }
         }
     }
 }
 
-class MovieDiffCallback : DiffUtil.ItemCallback<Movie>() {
+class MovieDiffCallback : DiffUtil.ItemCallback<HomeMovieUIState>() {
 
-    override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean = oldItem.id == newItem.id
+    override fun areItemsTheSame(oldItem: HomeMovieUIState, newItem: HomeMovieUIState): Boolean =
+        oldItem.movieID == newItem.movieID
 
-    override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean =
+    override fun areContentsTheSame(oldItem: HomeMovieUIState, newItem: HomeMovieUIState): Boolean =
         areItemsTheSame(oldItem, newItem)
 }

@@ -1,8 +1,7 @@
-package com.lukic.movieapp
+package com.lukic.movieapp.domain.model
 
-import java.util.*
+import java.util.UUID
 
-/* Used just for testing purposes*/
 data class Movie(
     val id: String = UUID.randomUUID().toString(),
     val title: String,
@@ -12,7 +11,8 @@ data class Movie(
     val credits: List<Credits>,
     val releaseDate: String,
     val duration: String,
-    val cast: List<Cast>
+    val cast: List<Cast>,
+    val movieThumbnail: String
 )
 
 data class Credits(
@@ -23,5 +23,6 @@ data class Credits(
 data class Cast(
     val id: String = UUID.randomUUID().toString(),
     val name: String,
-    val roleName: String
+    val roleName: String,
+    val castThumbnail: String
 )

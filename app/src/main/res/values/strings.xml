@@ -17,4 +17,5 @@
     <string name="top_billed_cast">Top Billed Cast</string>
     <string name="full_cast_amp_crew">Full cast &amp; crew</string>
     <string name="movie_rating">%1$s%%</string>
+    <string name="cancel">Cancel</string>
 </resources>

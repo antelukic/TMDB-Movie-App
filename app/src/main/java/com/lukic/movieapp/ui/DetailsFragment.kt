@@ -1,4 +1,4 @@
-package com.lukic.movieapp
+package com.lukic.movieapp.ui
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
@@ -8,12 +8,30 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.lukic.movieapp.adapters.CastAdapter
+import coil.load
+import com.lukic.movieapp.R
 import com.lukic.movieapp.databinding.FragmentDetailsBinding
+import com.lukic.movieapp.di.ObjectGraph
+import com.lukic.movieapp.ui.adapters.CastAdapter
+
+private const val INDICATOR_ANIMATION_DURATION = 1000L
 
 class DetailsFragment : Fragment() {
+
+    private val detailsViewModel by viewModels<DetailsViewModel> {
+        object : ViewModelProvider.NewInstanceFactory() {
+
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return DetailsViewModel(ObjectGraph.queryMovieByID) as T
+            }
+        }
+    }
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding: FragmentDetailsBinding get() = _binding!!
@@ -28,18 +46,21 @@ class DetailsFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
 
         val navArgs by navArgs<DetailsFragmentArgs>()
-        val movie = getMovieWithTitle(navArgs.title)
-        movie?.let {
+        detailsViewModel.getMovieByID(navArgs.id)
+
+        detailsViewModel.uiState?.let {
             with(binding) {
+                detailsMovieImage.load(it.movieThumbnail)
                 detailsScoreText.text = getString(R.string.movie_rating, it.rating.toString())
                 ObjectAnimator.ofInt(detailsScoreIndicator, "progress", it.rating).also {
-                    it.duration = 1000L
+                    it.duration = INDICATOR_ANIMATION_DURATION
                     it.interpolator = LinearInterpolator()
                     it.start()
                 }
@@ -52,7 +73,24 @@ class DetailsFragment : Fragment() {
                 }
                 detailsTotaltimeText.text = it.duration
                 detailsDescriptionText.text = it.overview
+                setMovieCredits()
 
+                detailsCastRv.adapter = CastAdapter().also { castAdapter ->
+                    castAdapter.submitList(it.cast)
+                }
+            }
+        }
+
+        binding.detailsBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        return binding.root
+    }
+
+    private fun setMovieCredits() {
+        detailsViewModel.uiState?.let {
+            with(binding) {
                 it.credits.forEachIndexed { index, credits ->
                     when (index) {
                         1 -> {
@@ -81,20 +119,7 @@ class DetailsFragment : Fragment() {
                         }
                     }
                 }
-                detailsCastRv.adapter = CastAdapter().also {
-                    it.submitList(movie.cast)
-                }
-
-                detailsBack.setOnClickListener {
-                    findNavController().navigateUp()
-                }
             }
         }
-
-        return binding.root
-    }
-
-    private fun getMovieWithTitle(title: String): Movie? {
-        return Movies.allMovies.firstOrNull { movie -> movie.title == title }
     }
 }

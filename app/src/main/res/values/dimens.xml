@@ -53,4 +53,5 @@
     <dimen name="home_text_size">20sp</dimen>
     <dimen name="cast_name_margin_start">4dp</dimen>
     <dimen name="cast_name_text_size">16sp</dimen>
+    <dimen name="home_cancel_text_size">16sp</dimen>
 </resources>

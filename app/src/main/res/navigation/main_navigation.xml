@@ -3,27 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/homePageFragment">
+    app:startDestination="@id/home_fragment">
 
     <fragment
-        android:id="@+id/homePageFragment"
-        android:name="com.lukic.movieapp.HomeFragment"
+        android:id="@+id/home_fragment"
+        android:name="com.lukic.movieapp.ui.HomeFragment"
         android:label="fragment_home_page"
         tools:layout="@layout/fragment_home">
 
         <action
-            android:id="@+id/action_homePageFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            android:id="@+id/action_homeFragment_to_detailsFragment"
+            app:destination="@id/details_fragment"
+            app:popUpTo="@id/home_fragment"/>
     </fragment>
 
     <fragment
-        android:id="@+id/detailsFragment"
-        android:name="com.lukic.movieapp.DetailsFragment"
+        android:id="@+id/details_fragment"
+        android:name="com.lukic.movieapp.ui.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details">
 
         <argument
-            android:name="title"
+            android:name="id"
             app:argType="string" />
     </fragment>
 </navigation>
