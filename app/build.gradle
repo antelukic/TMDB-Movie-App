@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlinx-serialization'
     id 'androidx.navigation.safeargs.kotlin'
 }
 
@@ -16,6 +17,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "DOMAIN_BASE", "\"https://api.themoviedb.org/\"")
+        buildConfigField("String", "API_KEY", "\"c6ea94caebf44cba907e6aa90ae307fe\"")
     }
 
     buildTypes {
@@ -47,6 +51,17 @@ dependencies {
 
     implementation "io.coil-kt:coil:2.2.0"
     implementation "io.insert-koin:koin-android:3.1.0"
+
+    def ktor_version = '2.1.0'
+    implementation "io.ktor:ktor-client-core:$ktor_version"
+    implementation "io.ktor:ktor-client-cio:$ktor_version"
+    implementation "io.ktor:ktor-client-logging:$ktor_version"
+    implementation "io.ktor:ktor-client-serialization:$ktor_version"
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+
+    def serialization_version = '1.4.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

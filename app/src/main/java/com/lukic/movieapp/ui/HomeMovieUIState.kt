@@ -1,6 +1,6 @@
 package com.lukic.movieapp.ui
 
 data class HomeMovieUIState(
-    val movieID: String,
-    val movieThumbnail: String
+    val movieID: Int,
+    val posterPath: String
 )

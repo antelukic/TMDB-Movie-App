@@ -33,12 +33,20 @@ class HomeFragment : Fragment() {
                 onItemClick(id, view)
             }
         )
-        movieAdapter.submitList(homeViewModel.movieUIState)
 
         with(binding) {
-            homeFreeRv.adapter = movieAdapter
-            homePopularRv.adapter = movieAdapter
-            homeTrendingRv.adapter = movieAdapter
+            homeDiscoverRv.adapter =
+                MovieAdapter(onClick = { id, view -> onItemClick(id, view) }).also {
+                    it.submitList(homeViewModel.discoverUIState)
+                }
+            homeForyouRv.adapter =
+                MovieAdapter(onClick = { id, view -> onItemClick(id, view) }).also {
+                    it.submitList(homeViewModel.forYouUIState)
+                }
+            homeTrendingRv.adapter =
+                MovieAdapter(onClick = { id, view -> onItemClick(id, view) }).also {
+                    it.submitList(homeViewModel.trendingUIState)
+                }
 
             homeSearchEditText.setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus)

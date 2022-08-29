@@ -3,6 +3,7 @@ package com.lukic.movieapp
 import android.app.Application
 import com.lukic.movieapp.di.detailsModule
 import com.lukic.movieapp.di.homeModule
+import com.lukic.movieapp.di.networkModule
 import org.koin.core.context.startKoin
 
 class MovieApplication : Application() {
@@ -13,7 +14,8 @@ class MovieApplication : Application() {
             modules(
                 listOf(
                     homeModule,
-                    detailsModule
+                    detailsModule,
+                    networkModule
                 )
             )
         }

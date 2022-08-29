@@ -31,10 +31,10 @@ class MovieAdapter(
             with(binding) {
                 with(movieImage) {
                     setOnClickListener { view ->
-                        onClick(movie.movieID, view)
+                        onClick(movie.movieID.toString(), view)
                     }
-                    ViewCompat.setTransitionName(this, movie.movieID)
-                    load(movie.movieThumbnail)
+                    ViewCompat.setTransitionName(this, movie.movieID.toString())
+                    load(movie.posterPath)
                 }
             }
         }

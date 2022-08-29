@@ -3,16 +3,16 @@ package com.lukic.movieapp.domain.model
 import java.util.UUID
 
 data class Movie(
-    val id: String = UUID.randomUUID().toString(),
+    val id: Int,
     val title: String,
     val overview: String,
-    val genres: List<String>,
+    val genres: List<Int>,
     val rating: Int,
     val credits: List<Credits>,
     val releaseDate: String,
     val duration: String,
     val cast: List<Cast>,
-    val movieThumbnail: String
+    val posterPath: String
 )
 
 data class Credits(
