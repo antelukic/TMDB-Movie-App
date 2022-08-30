@@ -2,14 +2,13 @@ package com.lukic.movieapp.ui
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.lukic.movieapp.domain.model.ForYouType
 import com.lukic.movieapp.domain.model.Movie
 import com.lukic.movieapp.domain.model.ShowType
 import com.lukic.movieapp.domain.usecase.QueryDiscoverShows
 import com.lukic.movieapp.domain.usecase.QueryForYouMovies
 import com.lukic.movieapp.domain.usecase.QueryTrendingMovies
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class HomeViewModel(
     private val queryTrendingMovies: QueryTrendingMovies,
@@ -21,6 +20,8 @@ class HomeViewModel(
     var discoverUIState: List<HomeMovieUIState> = listOf()
     var trendingUIState: List<HomeMovieUIState> = listOf()
 
+    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+
     init {
         getTrendingMovies(DEFAULT_TIME_WINDOW)
         getDiscoverShows(DEFAULT_SHOW_TYPE)
@@ -28,23 +29,23 @@ class HomeViewModel(
     }
 
     private fun getTrendingMovies(timeWindow: String) {
-        viewModelScope.launch {
+        scope.launch {
             trendingUIState = fromMoviesToHomeMovieUIStates(queryTrendingMovies(timeWindow))
-            Log.d(TAG, "getMovies: trendingUIState $trendingUIState")
+            Log.d(TAG, "getMovies: threadName: ${Thread.currentThread().name} trendingUIState: $trendingUIState")
         }
     }
 
     private fun getDiscoverShows(showType: ShowType) {
-        viewModelScope.launch {
+        scope.launch {
             discoverUIState = fromMoviesToHomeMovieUIStates(queryDiscoverShows(showType))
-            Log.d(TAG, "getDiscoverShows: discoverUIState $discoverUIState")
+            Log.d(TAG, "getDiscoverShows: threadName: ${Thread.currentThread().name} discoverUIState $discoverUIState")
         }
     }
 
     private fun getForYouMovies(type: ForYouType) {
-        viewModelScope.launch {
+        scope.launch {
             forYouUIState = fromMoviesToHomeMovieUIStates(queryForYouMovies(type))
-            Log.d(TAG, "getForYou: forYouMovies $forYouUIState")
+            Log.d(TAG, "getForYou: threadName: ${Thread.currentThread().name} forYouMovies $forYouUIState")
         }
     }
 
@@ -57,6 +58,11 @@ class HomeViewModel(
                 )
             }
         }
+
+    override fun onCleared() {
+        super.onCleared()
+        scope.cancel()
+    }
 
     companion object {
         private const val DEFAULT_TIME_WINDOW = "day"

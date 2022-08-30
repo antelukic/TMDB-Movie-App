@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    private fun onItemClick(id: String, view: View) {
+    private fun onItemClick(id: Int, view: View) {
         val extras = FragmentNavigatorExtras(view to DETAILS_IMAGE_ID)
         findNavController().navigate(
             HomeFragmentDirections.actionHomeFragmentToDetailsFragment(id),

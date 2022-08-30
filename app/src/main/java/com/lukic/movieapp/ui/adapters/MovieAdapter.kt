@@ -12,7 +12,7 @@ import com.lukic.movieapp.databinding.ItemMovieBinding
 import com.lukic.movieapp.ui.HomeMovieUIState
 
 class MovieAdapter(
-    private val onClick: (String, View) -> Unit
+    private val onClick: (Int, View) -> Unit
 ) : ListAdapter<HomeMovieUIState, MovieAdapter.MovieViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -31,7 +31,7 @@ class MovieAdapter(
             with(binding) {
                 with(movieImage) {
                     setOnClickListener { view ->
-                        onClick(movie.movieID.toString(), view)
+                        onClick(movie.movieID, view)
                     }
                     ViewCompat.setTransitionName(this, movie.movieID.toString())
                     load(movie.posterPath)

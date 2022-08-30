@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/home_fragment">
+    app:startDestination="@id/details_fragment">
 
     <fragment
         android:id="@+id/home_fragment"
@@ -25,6 +25,6 @@
 
         <argument
             android:name="id"
-            app:argType="string" />
+            app:argType="integer" />
     </fragment>
 </navigation>

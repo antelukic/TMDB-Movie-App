@@ -18,7 +18,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "DOMAIN_BASE", "\"https://api.themoviedb.org/\"")
+        buildConfigField("String", "DOMAIN_BASE", "\"https://api.themoviedb.org/3/\"")
         buildConfigField("String", "API_KEY", "\"c6ea94caebf44cba907e6aa90ae307fe\"")
     }
 

@@ -34,7 +34,7 @@ class CastAdapter :
             with(binding) {
                 castName.text = cast.name
                 castRoleName.text = cast.roleName
-                castImage.load(cast.castThumbnail)
+                castImage.load(cast.posterPath)
             }
         }
     }

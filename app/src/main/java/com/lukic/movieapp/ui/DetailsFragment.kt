@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import coil.load
 import com.lukic.movieapp.R
 import com.lukic.movieapp.databinding.FragmentDetailsBinding
@@ -41,12 +40,12 @@ class DetailsFragment : Fragment() {
     ): View {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
 
-        val navArgs by navArgs<DetailsFragmentArgs>()
-        detailsViewModel.getMovieByID(navArgs.id)
+//        val navArgs by navArgs<DetailsFragmentArgs>()
+//        detailsViewModel.getMovieByID(navArgs.id)
 
         detailsViewModel.uiState?.let {
             with(binding) {
-                detailsMovieImage.load(it.movieThumbnail)
+                detailsMovieImage.load(it.posterPath)
                 detailsScoreText.text = getString(R.string.movie_rating, it.rating.toString())
                 ObjectAnimator.ofInt(detailsScoreIndicator, "progress", it.rating).also {
                     it.duration = INDICATOR_ANIMATION_DURATION

@@ -11,4 +11,6 @@ interface MovieRepository {
     suspend fun discoverShows(showType: ShowType): List<Movie>
 
     suspend fun forYouMovies(type: ForYouType): List<Movie>
+
+    suspend fun movieDetails(movieId: Int): Movie
 }
