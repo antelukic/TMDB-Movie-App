@@ -1,12 +1,12 @@
 package com.lukic.movieapp.di
 
-import com.lukic.movieapp.data.mapper.MovieMapper
-import com.lukic.movieapp.data.mapper.MovieMapperImpl
-import com.lukic.movieapp.data.repository.MovieRepositoryImpl
-import com.lukic.movieapp.domain.repository.MovieRepository
-import com.lukic.movieapp.domain.usecase.QueryDiscoverShows
-import com.lukic.movieapp.domain.usecase.QueryForYouMovies
-import com.lukic.movieapp.domain.usecase.QueryTrendingMovies
+import com.lukic.data.mapper.MovieMapper
+import com.lukic.data.mapper.MovieMapperImpl
+import com.lukic.data.repository.MovieRepositoryImpl
+import com.lukic.domain.repository.MovieRepository
+import com.lukic.domain.usecase.QueryDiscoverShows
+import com.lukic.domain.usecase.QueryForYouMovies
+import com.lukic.domain.usecase.QueryTrendingMovies
 import com.lukic.movieapp.ui.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

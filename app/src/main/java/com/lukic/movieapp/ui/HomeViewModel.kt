@@ -2,12 +2,13 @@ package com.lukic.movieapp.ui
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.lukic.movieapp.domain.model.ForYouType
-import com.lukic.movieapp.domain.model.Movie
-import com.lukic.movieapp.domain.model.ShowType
-import com.lukic.movieapp.domain.usecase.QueryDiscoverShows
-import com.lukic.movieapp.domain.usecase.QueryForYouMovies
-import com.lukic.movieapp.domain.usecase.QueryTrendingMovies
+import com.lukic.domain.model.ForYouType
+import com.lukic.domain.model.Movie
+import com.lukic.domain.model.ShowType
+import com.lukic.domain.usecase.QueryDiscoverShows
+import com.lukic.domain.usecase.QueryForYouMovies
+import com.lukic.domain.usecase.QueryTrendingMovies
+
 import kotlinx.coroutines.*
 
 class HomeViewModel(

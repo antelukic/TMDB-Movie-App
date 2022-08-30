@@ -1,7 +1,7 @@
 package com.lukic.movieapp.ui
 
-import com.lukic.movieapp.domain.model.Cast
-import com.lukic.movieapp.domain.model.Crew
+import com.lukic.domain.model.Cast
+import com.lukic.domain.model.Crew
 
 data class MovieDetailsUIState(
     val title: String,

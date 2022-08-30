@@ -9,17 +9,20 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import coil.load
 import com.lukic.movieapp.R
 import com.lukic.movieapp.databinding.FragmentDetailsBinding
 import com.lukic.movieapp.ui.adapters.CastAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 private const val INDICATOR_ANIMATION_DURATION = 1000L
 
 class DetailsFragment : Fragment() {
 
-    private val detailsViewModel by viewModel<DetailsViewModel>()
+    private val navArgs by navArgs<DetailsFragmentArgs>()
+    private val detailsViewModel by viewModel<DetailsViewModel> { parametersOf(navArgs.id) }
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding: FragmentDetailsBinding get() = _binding!!
@@ -40,8 +43,6 @@ class DetailsFragment : Fragment() {
     ): View {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
 
-//        val navArgs by navArgs<DetailsFragmentArgs>()
-//        detailsViewModel.getMovieByID(navArgs.id)
 
         detailsViewModel.uiState?.let {
             with(binding) {

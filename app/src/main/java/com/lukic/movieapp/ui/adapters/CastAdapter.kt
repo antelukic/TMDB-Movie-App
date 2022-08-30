@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.lukic.domain.model.Cast
 import com.lukic.movieapp.databinding.ItemCastBinding
-import com.lukic.movieapp.domain.model.Cast
 
 class CastAdapter :
     ListAdapter<Cast, CastAdapter.CastViewHolder>(CastDiffCallback()) {

@@ -3,17 +3,18 @@ package com.lukic.movieapp.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lukic.movieapp.domain.usecase.QueryMovieDetails
+import com.lukic.domain.usecase.QueryMovieDetails
 import kotlinx.coroutines.launch
 
-private const val DEFAULT_MOVIE_ID = 616037
-
-class DetailsViewModel(private val queryMovieDetails: QueryMovieDetails) : ViewModel() {
+class DetailsViewModel(
+    private val queryMovieDetails: QueryMovieDetails,
+    movieID: Int
+) : ViewModel() {
 
     var uiState: MovieDetailsUIState? = null
 
     init {
-        getMovieByID(DEFAULT_MOVIE_ID)
+        getMovieByID(movieID)
     }
 
     private fun getMovieByID(id: Int) {
