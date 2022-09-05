@@ -1,9 +1,9 @@
 package com.lukic.movieapp.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lukic.domain.usecase.QueryMovieDetails
+import com.lukic.movieapp.BuildConfig
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(
@@ -19,20 +19,20 @@ class DetailsViewModel(
 
     private fun getMovieByID(id: Int) {
         viewModelScope.launch {
-            uiState = queryMovieDetails(id).let {
-                MovieDetailsUIState(
-                    title = it.title,
-                    overview = it.overview,
-                    genres = it.genres,
-                    rating = it.rating,
-                    credits = it.crew,
-                    releaseDate = it.releaseDate,
-                    duration = it.duration,
-                    cast = it.cast,
-                    posterPath = it.posterPath
-                )
-            }
-            Log.d("DetailsViewModel", "getMovieByID: detailsUIState $uiState")
+            queryMovieDetails(id)
+                .collect {
+                    uiState = MovieDetailsUIState(
+                        title = it.title,
+                        overview = it.overview,
+                        genres = it.genres,
+                        rating = it.rating,
+                        credits = it.crew,
+                        releaseDate = it.releaseDate,
+                        duration = it.duration,
+                        cast = it.cast,
+                        posterPath = BuildConfig.DOMAIN_BASE_IMAGE + it.posterPath
+                    )
+                }
         }
     }
 }

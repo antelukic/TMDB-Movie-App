@@ -2,7 +2,6 @@ package com.lukic.data.api
 
 import com.lukic.data.api.model.*
 
-
 interface MovieService {
 
     suspend fun fetchTrendingMovies(timeWindow: String): ApiMovies?

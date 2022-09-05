@@ -43,7 +43,6 @@ class DetailsFragment : Fragment() {
     ): View {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
 
-
         detailsViewModel.uiState?.let {
             with(binding) {
                 detailsMovieImage.load(it.posterPath)

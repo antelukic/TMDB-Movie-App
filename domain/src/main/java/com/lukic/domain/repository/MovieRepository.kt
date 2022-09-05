@@ -3,14 +3,21 @@ package com.lukic.domain.repository
 import com.lukic.domain.model.ForYouType
 import com.lukic.domain.model.Movie
 import com.lukic.domain.model.ShowType
+import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
 
-    suspend fun trendingMovies(timeWindow: String): List<Movie>
+    fun trendingMovies(): Flow<List<Movie>>
 
-    suspend fun discoverShows(showType: ShowType): List<Movie>
+    fun forYouMovies(): Flow<List<Movie>>
 
-    suspend fun forYouMovies(type: ForYouType): List<Movie>
+    fun discoverShows(): Flow<List<Movie>>
 
-    suspend fun movieDetails(movieId: Int): Movie
+    suspend fun refreshTrendingMovies(timeWindow: String)
+
+    suspend fun refreshForYouMovies(type: ForYouType)
+
+    suspend fun refreshDiscoverMovies(showType: ShowType)
+
+    fun movieDetails(movieId: Int): Flow<Movie>
 }

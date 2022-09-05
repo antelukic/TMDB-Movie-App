@@ -1,52 +1,65 @@
 package com.lukic.movieapp.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.lukic.domain.model.ForYouType
 import com.lukic.domain.model.Movie
 import com.lukic.domain.model.ShowType
-import com.lukic.domain.usecase.QueryDiscoverShows
-import com.lukic.domain.usecase.QueryForYouMovies
-import com.lukic.domain.usecase.QueryTrendingMovies
-
+import com.lukic.domain.usecase.*
+import com.lukic.movieapp.BuildConfig
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 
 class HomeViewModel(
     private val queryTrendingMovies: QueryTrendingMovies,
     private val queryDiscoverShows: QueryDiscoverShows,
-    private val queryForYouMovies: QueryForYouMovies
+    private val queryForYouMovies: QueryForYouMovies,
+    private val refreshTrendingMovies: RefreshTrendingMovies,
+    private val refreshDiscoverMovies: RefreshDiscoverMovies,
+    private val refreshForYouMovies: RefreshForYouMovies
 ) : ViewModel() {
 
-    var forYouUIState: List<HomeMovieUIState> = listOf()
-    var discoverUIState: List<HomeMovieUIState> = listOf()
-    var trendingUIState: List<HomeMovieUIState> = listOf()
+    private val _trendingUIState = MutableStateFlow<List<HomeMovieUIState>>(emptyList())
+    val trendingUIState: StateFlow<List<HomeMovieUIState>> get() = _trendingUIState
+
+    private val _discoverUIState = MutableStateFlow<List<HomeMovieUIState>>(emptyList())
+    val discoverUIState: StateFlow<List<HomeMovieUIState>> get() = _discoverUIState
+
+    private val _forYouUIState = MutableStateFlow<List<HomeMovieUIState>>(emptyList())
+    val forYouUIState: StateFlow<List<HomeMovieUIState>> get() = _forYouUIState
 
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     init {
-        getTrendingMovies(DEFAULT_TIME_WINDOW)
-        getDiscoverShows(DEFAULT_SHOW_TYPE)
-        getForYouMovies(DEFAULT_FOR_YOU_TYPE)
-    }
-
-    private fun getTrendingMovies(timeWindow: String) {
         scope.launch {
-            trendingUIState = fromMoviesToHomeMovieUIStates(queryTrendingMovies(timeWindow))
-            Log.d(TAG, "getMovies: threadName: ${Thread.currentThread().name} trendingUIState: $trendingUIState")
+            queryTrendingMovies()
+                .onEach { movies -> _trendingUIState.update { fromMoviesToHomeMovieUIStates(movies) } }
+                .launchIn(scope)
+
+            queryForYouMovies()
+                .onEach { movies -> _forYouUIState.update { fromMoviesToHomeMovieUIStates(movies) } }
+                .launchIn(scope)
+
+            queryDiscoverShows()
+                .onEach { movies -> _discoverUIState.update { fromMoviesToHomeMovieUIStates(movies) } }
+                .launchIn(scope)
         }
     }
 
-    private fun getDiscoverShows(showType: ShowType) {
+    fun refreshTrendingMovies(timeWindow: String) {
         scope.launch {
-            discoverUIState = fromMoviesToHomeMovieUIStates(queryDiscoverShows(showType))
-            Log.d(TAG, "getDiscoverShows: threadName: ${Thread.currentThread().name} discoverUIState $discoverUIState")
+            refreshTrendingMovies(param = timeWindow)
         }
     }
 
-    private fun getForYouMovies(type: ForYouType) {
+    fun refreshForYouMovies(type: ForYouType) {
         scope.launch {
-            forYouUIState = fromMoviesToHomeMovieUIStates(queryForYouMovies(type))
-            Log.d(TAG, "getForYou: threadName: ${Thread.currentThread().name} forYouMovies $forYouUIState")
+            refreshForYouMovies(param = type)
+        }
+    }
+
+    fun refreshDiscoverMovies(type: ShowType) {
+        scope.launch {
+            refreshDiscoverMovies(param = type)
         }
     }
 
@@ -55,7 +68,7 @@ class HomeViewModel(
             with(movie) {
                 HomeMovieUIState(
                     movieID = id,
-                    posterPath = posterPath
+                    posterPath = BuildConfig.DOMAIN_BASE_IMAGE + posterPath
                 )
             }
         }
@@ -63,12 +76,5 @@ class HomeViewModel(
     override fun onCleared() {
         super.onCleared()
         scope.cancel()
-    }
-
-    companion object {
-        private const val DEFAULT_TIME_WINDOW = "day"
-        private val DEFAULT_SHOW_TYPE = ShowType.MOVIE
-        private const val TAG = "HomeViewModel"
-        private val DEFAULT_FOR_YOU_TYPE = ForYouType.POPULAR
     }
 }

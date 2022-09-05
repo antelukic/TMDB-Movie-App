@@ -1,5 +1,5 @@
 package com.lukic.domain.model
 
 enum class ShowType {
-    TV, MOVIE
+    NOW_PLAYING, UPCOMING
 }

@@ -1,10 +1,17 @@
 package com.lukic.data.mapper
 
-
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.lukic.data.api.model.*
+import com.lukic.data.api.model.ForYouApi.Popular
+import com.lukic.data.api.model.ForYouApi.TopRated
+import com.lukic.data.api.model.ShowTypeApi.NowPlaying
+import com.lukic.data.api.model.ShowTypeApi.Upcoming
 import com.lukic.domain.model.*
+import com.lukic.domain.model.ForYouType.POPULAR
+import com.lukic.domain.model.ForYouType.TOP_RATED
+import com.lukic.domain.model.ShowType.NOW_PLAYING
+import com.lukic.domain.model.ShowType.UPCOMING
 import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
@@ -82,13 +89,13 @@ class MovieMapperImpl : MovieMapper {
 
     override fun toShowTypeApi(type: ShowType): ShowTypeApi =
         when (type) {
-            ShowType.MOVIE -> ShowTypeApi.Movie
-            ShowType.TV -> ShowTypeApi.Tv
+            NOW_PLAYING -> NowPlaying
+            UPCOMING -> Upcoming
         }
 
     override fun toForYouApi(type: ForYouType): ForYouApi =
         when (type) {
-            ForYouType.POPULAR -> ForYouApi.Popular
-            ForYouType.TOP_RATED -> ForYouApi.TopRated
+            POPULAR -> Popular
+            TOP_RATED -> TopRated
         }
 }

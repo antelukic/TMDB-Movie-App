@@ -1,11 +1,11 @@
 package com.lukic.domain.usecase
 
-import com.lukic.domain.model.ForYouType
 import com.lukic.domain.model.Movie
 import com.lukic.domain.repository.MovieRepository
+import kotlinx.coroutines.flow.Flow
 
 class QueryForYouMovies(private val repository: MovieRepository) :
-    QueryUseCaseWithParam<ForYouType, List<Movie>> {
+    QueryUseCase<List<Movie>> {
 
-    override suspend fun invoke(param: ForYouType): List<Movie> = repository.forYouMovies(param)
+    override fun invoke(): Flow<List<Movie>> = repository.forYouMovies()
 }

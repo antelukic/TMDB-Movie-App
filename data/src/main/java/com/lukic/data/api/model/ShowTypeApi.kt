@@ -1,6 +1,6 @@
 package com.lukic.data.api.model
 
 sealed class ShowTypeApi(val key: String) {
-    object Tv : ShowTypeApi("tv")
-    object Movie : ShowTypeApi("movie")
+    object NowPlaying : ShowTypeApi("now_playing")
+    object Upcoming : ShowTypeApi("upcoming")
 }
