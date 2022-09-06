@@ -6,5 +6,6 @@ import com.lukic.domain.repository.MovieRepository
 class RefreshDiscoverMovies(private val repository: MovieRepository) :
     CommandUseCaseWithParam<ShowType> {
 
-    override suspend fun invoke(param: ShowType) = repository.refreshDiscoverMovies(param)
+    @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+    override suspend fun invoke(showType: ShowType) = repository.refreshDiscoverMovies(showType)
 }

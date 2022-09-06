@@ -116,6 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/details_title_text_margin_end"
                 android:fontFamily="@font/nunito_sans_extrabold"
+                android:textColor="@color/white"
                 android:padding="@dimen/common_text_padding"
                 android:textSize="@dimen/details_title_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -219,6 +220,8 @@
                 android:padding="@dimen/common_text_padding"
                 android:textColor="@color/dark_blue_primary"
                 android:textSize="@dimen/details_credits_text_size"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="@id/details_guidver33"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/details_description_text" />
@@ -231,6 +234,8 @@
                 android:padding="@dimen/common_text_padding"
                 android:textColor="@color/black"
                 android:textSize="@dimen/details_credits_text_size"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="@id/details_credits_name1"
                 app:layout_constraintStart_toStartOf="@id/details_credits_name1"
                 app:layout_constraintTop_toBottomOf="@id/details_credits_name1" />
@@ -244,6 +249,8 @@
                 android:padding="@dimen/common_text_padding"
                 android:textColor="@color/dark_blue_primary"
                 android:textSize="@dimen/details_credits_text_size"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintBaseline_toBaselineOf="@id/details_credits_name1"
                 app:layout_constraintEnd_toEndOf="@id/details_guidver66"
                 app:layout_constraintStart_toStartOf="@id/details_guidver33" />
@@ -256,6 +263,8 @@
                 android:padding="@dimen/common_text_padding"
                 android:textColor="@color/black"
                 android:textSize="@dimen/details_credits_text_size"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="@id/details_credits_name2"
                 app:layout_constraintStart_toStartOf="@id/details_credits_name2"
                 app:layout_constraintTop_toBottomOf="@id/details_credits_name2" />
@@ -269,6 +278,8 @@
                 android:padding="@dimen/common_text_padding"
                 android:textColor="@color/dark_blue_primary"
                 android:textSize="@dimen/details_credits_text_size"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintBaseline_toBaselineOf="@id/details_credits_name2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/details_guidver66" />
@@ -281,6 +292,8 @@
                 android:padding="@dimen/common_text_padding"
                 android:textColor="@color/black"
                 android:textSize="@dimen/details_credits_text_size"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="@id/details_credits_name3"
                 app:layout_constraintStart_toStartOf="@id/details_credits_name3"
                 app:layout_constraintTop_toBottomOf="@id/details_credits_name3" />
@@ -294,6 +307,8 @@
                 android:padding="@dimen/common_text_padding"
                 android:textColor="@color/dark_blue_primary"
                 android:textSize="@dimen/details_credits_text_size"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintEnd_toStartOf="@id/details_guidver33"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/details_credits_type1" />
@@ -306,6 +321,8 @@
                 android:padding="@dimen/common_text_padding"
                 android:textColor="@color/black"
                 android:textSize="@dimen/details_credits_text_size"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="@id/details_credits_name4"
                 app:layout_constraintStart_toStartOf="@id/details_credits_name4"
                 app:layout_constraintTop_toBottomOf="@id/details_credits_name4" />
@@ -319,6 +336,8 @@
                 android:padding="@dimen/common_text_padding"
                 android:textColor="@color/dark_blue_primary"
                 android:textSize="@dimen/details_credits_text_size"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintBaseline_toBaselineOf="@id/details_credits_name4"
                 app:layout_constraintEnd_toStartOf="@id/details_guidver66"
                 app:layout_constraintStart_toEndOf="@id/details_guidver33" />
@@ -331,6 +350,8 @@
                 android:padding="@dimen/common_text_padding"
                 android:textColor="@color/black"
                 android:textSize="@dimen/details_credits_text_size"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="@id/details_credits_name5"
                 app:layout_constraintStart_toStartOf="@id/details_credits_name5"
                 app:layout_constraintTop_toBottomOf="@id/details_credits_name5" />
@@ -344,6 +365,8 @@
                 android:padding="@dimen/common_text_padding"
                 android:textColor="@color/dark_blue_primary"
                 android:textSize="@dimen/details_credits_text_size"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintBaseline_toBaselineOf="@id/details_credits_name5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/details_guidver66" />
@@ -356,6 +379,8 @@
                 android:padding="@dimen/common_text_padding"
                 android:textColor="@color/black"
                 android:textSize="@dimen/details_credits_text_size"
+                android:maxLines="2"
+                android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="@id/details_credits_name6"
                 app:layout_constraintStart_toStartOf="@id/details_credits_name6"
                 app:layout_constraintTop_toBottomOf="@id/details_credits_name6" />
@@ -389,7 +414,7 @@
                 app:layout_constraintStart_toEndOf="@id/details_guidver66" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/details_cast_rv"
+                android:id="@+id/details_cast_members"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/rv_margin_bottom"

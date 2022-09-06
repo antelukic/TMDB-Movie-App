@@ -13,11 +13,13 @@ interface MovieRepository {
 
     fun discoverShows(): Flow<List<Movie>>
 
+    fun movieDetails(): Flow<Movie>
+
     suspend fun refreshTrendingMovies(timeWindow: String)
 
     suspend fun refreshForYouMovies(type: ForYouType)
 
     suspend fun refreshDiscoverMovies(showType: ShowType)
 
-    fun movieDetails(movieId: Int): Flow<Movie>
+    suspend fun refreshMovieDetails(movieId: Int)
 }

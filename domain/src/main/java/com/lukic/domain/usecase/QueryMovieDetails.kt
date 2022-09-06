@@ -5,7 +5,7 @@ import com.lukic.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 
 class QueryMovieDetails(private val movieRepository: MovieRepository) :
-    QueryUseCaseWithParam<Int, Movie> {
+    QueryUseCase<Movie> {
 
-    override fun invoke(param: Int): Flow<Movie> = movieRepository.movieDetails(param)
+    override fun invoke(): Flow<Movie> = movieRepository.movieDetails()
 }

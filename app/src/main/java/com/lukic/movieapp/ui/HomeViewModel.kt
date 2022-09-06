@@ -47,19 +47,19 @@ class HomeViewModel(
 
     fun refreshTrendingMovies(timeWindow: String) {
         scope.launch {
-            refreshTrendingMovies(param = timeWindow)
+            refreshTrendingMovies(time = timeWindow)
         }
     }
 
     fun refreshForYouMovies(type: ForYouType) {
         scope.launch {
-            refreshForYouMovies(param = type)
+            refreshForYouMovies(forYouType = type)
         }
     }
 
     fun refreshDiscoverMovies(type: ShowType) {
         scope.launch {
-            refreshDiscoverMovies(param = type)
+            refreshDiscoverMovies(showType = type)
         }
     }
 

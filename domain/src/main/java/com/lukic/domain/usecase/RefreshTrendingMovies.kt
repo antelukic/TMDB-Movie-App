@@ -5,5 +5,6 @@ import com.lukic.domain.repository.MovieRepository
 class RefreshTrendingMovies(private val repository: MovieRepository) :
     CommandUseCaseWithParam<String> {
 
-    override suspend fun invoke(param: String) = repository.refreshTrendingMovies(param)
+    @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+    override suspend fun invoke(time: String) = repository.refreshTrendingMovies(time)
 }

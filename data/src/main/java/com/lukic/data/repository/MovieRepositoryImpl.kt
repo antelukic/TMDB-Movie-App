@@ -9,7 +9,7 @@ import com.lukic.domain.repository.MovieRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.mapLatest
 
 const val DAY_TIME_WINDOW = "day"
@@ -25,6 +25,8 @@ class MovieRepositoryImpl(
     private val refreshForYouMoviesPublisher = MutableStateFlow(ForYouType.TOP_RATED)
 
     private val refreshDiscoverMoviesPublisher = MutableStateFlow(ShowType.NOW_PLAYING)
+
+    private val movieDetailsIdPublisher = MutableStateFlow<Int?>(null)
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun trendingMovies(): Flow<List<Movie>> = refreshTrendingMoviesPublisher
@@ -44,6 +46,15 @@ class MovieRepositoryImpl(
             movieMapper.toMovies(movieService.fetchDiscoverShows(movieMapper.toShowTypeApi(showType))?.movies)
         }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override fun movieDetails(): Flow<Movie> = movieDetailsIdPublisher
+        .filterNotNull()
+        .mapLatest { movieId ->
+            val detailsResponse = movieService.fetchMovieDetails(movieId)
+            val castAndCrewResponse = movieService.fetchCastAndCrew(movieId)
+            movieMapper.toMovie(detailsResponse, castAndCrewResponse)
+        }
+
     override suspend fun refreshTrendingMovies(timeWindow: String) =
         refreshTrendingMoviesPublisher.emit(timeWindow)
 
@@ -53,12 +64,5 @@ class MovieRepositoryImpl(
     override suspend fun refreshDiscoverMovies(showType: ShowType) =
         refreshDiscoverMoviesPublisher.emit(showType)
 
-    override fun movieDetails(movieId: Int): Flow<Movie> {
-//        val detailsResponse = movieService.fetchMovieDetails(movieId)
-//        val castAndCrewResponse = movieService.fetchCastAndCrew(movieId)
-//        return movieMapper.toMovie(detailsResponse, castAndCrewResponse)
-
-//        Commented because in this PR there is no change for this function. And it causes error for the use case because its not suspendable any more
-        return flow { emit(Movie.EMPTY_MOVIE) }
-    }
+    override suspend fun refreshMovieDetails(movieId: Int) = movieDetailsIdPublisher.emit(movieId)
 }
