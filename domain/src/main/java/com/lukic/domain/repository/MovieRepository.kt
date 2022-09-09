@@ -15,11 +15,17 @@ interface MovieRepository {
 
     fun movieDetails(): Flow<Movie>
 
+    fun favouriteMovies(): Flow<List<Movie>>
+
     suspend fun refreshTrendingMovies(timeWindow: String)
 
     suspend fun refreshForYouMovies(type: ForYouType)
 
     suspend fun refreshDiscoverMovies(showType: ShowType)
+
+    suspend fun removeFromFavourites(movie: Movie)
+
+    suspend fun insertFavouriteMovie(movie: Movie)
 
     suspend fun refreshMovieDetails(movieId: Int)
 }

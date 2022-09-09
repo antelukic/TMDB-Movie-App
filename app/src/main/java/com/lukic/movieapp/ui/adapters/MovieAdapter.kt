@@ -1,18 +1,18 @@
 package com.lukic.movieapp.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.lukic.movieapp.R
 import com.lukic.movieapp.databinding.ItemMovieBinding
 import com.lukic.movieapp.ui.HomeMovieUIState
 
 class MovieAdapter(
-    private val onClick: (Int, View) -> Unit
+    private val onCardClick: (Int) -> Unit,
+    private val onFavouriteClick: (HomeMovieUIState) -> Unit
 ) : ListAdapter<HomeMovieUIState, MovieAdapter.MovieViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -30,11 +30,19 @@ class MovieAdapter(
         fun bind(movie: HomeMovieUIState) {
             with(binding) {
                 with(movieImage) {
-                    setOnClickListener { view ->
-                        onClick(movie.movieID, view)
+                    setOnClickListener {
+                        onCardClick(movie.movieID)
                     }
-                    ViewCompat.setTransitionName(this, movie.movieID.toString())
                     load(movie.posterPath)
+                }
+                with(movieFavouritesSelector) {
+                    setImageResource(
+                        if (movie.isFavourite) R.drawable.ic_filled_heart_with_background
+                        else R.drawable.ic_heart
+                    )
+                    setOnClickListener {
+                        onFavouriteClick(movie)
+                    }
                 }
             }
         }
@@ -47,5 +55,5 @@ class MovieDiffCallback : DiffUtil.ItemCallback<HomeMovieUIState>() {
         oldItem.movieID == newItem.movieID
 
     override fun areContentsTheSame(oldItem: HomeMovieUIState, newItem: HomeMovieUIState): Boolean =
-        areItemsTheSame(oldItem, newItem)
+        oldItem == newItem
 }

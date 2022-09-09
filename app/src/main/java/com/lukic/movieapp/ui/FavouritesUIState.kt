@@ -1,7 +1,6 @@
 package com.lukic.movieapp.ui
 
-data class HomeMovieUIState(
+data class FavouritesUIState(
     val movieID: Int,
     val posterPath: String,
-    val isFavourite: Boolean
 )

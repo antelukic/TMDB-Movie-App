@@ -1,23 +1,24 @@
 package com.lukic.data.repository
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.lukic.data.api.MovieService
+import com.lukic.data.database.MovieDao
 import com.lukic.data.mapper.MovieMapper
 import com.lukic.domain.model.ForYouType
 import com.lukic.domain.model.Movie
 import com.lukic.domain.model.ShowType
 import com.lukic.domain.repository.MovieRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.*
 
 const val DAY_TIME_WINDOW = "day"
 const val WEEK_TIME_WINDOW = "week"
 
 class MovieRepositoryImpl(
     private val movieService: MovieService,
-    private val movieMapper: MovieMapper
+    private val movieMapper: MovieMapper,
+    private val dao: MovieDao
 ) : MovieRepository {
 
     private val refreshTrendingMoviesPublisher = MutableStateFlow(DAY_TIME_WINDOW)
@@ -28,31 +29,58 @@ class MovieRepositoryImpl(
 
     private val movieDetailsIdPublisher = MutableStateFlow<Int?>(null)
 
+    @RequiresApi(Build.VERSION_CODES.N)
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun trendingMovies(): Flow<List<Movie>> = refreshTrendingMoviesPublisher
-        .mapLatest { timeWindow ->
-            movieMapper.toMovies(movieService.fetchTrendingMovies(timeWindow)?.movies)
-        }
+    override fun trendingMovies(): Flow<List<Movie>> = combine(
+        refreshTrendingMoviesPublisher
+            .mapLatest { timeWindow ->
+                movieService.fetchTrendingMovies(timeWindow)?.movies
+            },
+        dao.fetchMovies()
+    ) { trendingMovies, favouriteMovies ->
+        movieMapper.toMovies(trendingMovies, favouriteMovies)
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun forYouMovies(): Flow<List<Movie>> = refreshForYouMoviesPublisher
-        .mapLatest { forYouType ->
-            movieMapper.toMovies(movieService.fetchForYouMovies(movieMapper.toForYouApi(forYouType))?.movies)
-        }
+    override fun forYouMovies(): Flow<List<Movie>> = combine(
+        refreshForYouMoviesPublisher
+            .mapLatest { forYouTypeApi ->
+                movieService.fetchForYouMovies(movieMapper.toForYouApi(forYouTypeApi))?.movies
+            },
+        dao.fetchMovies()
+    ) { forYouMovies, favouriteMovies ->
+        movieMapper.toMovies(forYouMovies, favouriteMovies)
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun discoverShows(): Flow<List<Movie>> = refreshDiscoverMoviesPublisher
-        .mapLatest { showType ->
-            movieMapper.toMovies(movieService.fetchDiscoverShows(movieMapper.toShowTypeApi(showType))?.movies)
-        }
+    override fun discoverShows(): Flow<List<Movie>> = combine(
+        refreshDiscoverMoviesPublisher
+            .mapLatest { showTypeApi ->
+                movieService.fetchDiscoverShows(movieMapper.toShowTypeApi(showTypeApi))?.movies
+            },
+        dao.fetchMovies()
+    ) { discoverShows, favouriteMovies ->
+        movieMapper.toMovies(discoverShows, favouriteMovies)
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    override fun movieDetails(): Flow<Movie> = movieDetailsIdPublisher
-        .filterNotNull()
-        .mapLatest { movieId ->
-            val detailsResponse = movieService.fetchMovieDetails(movieId)
-            val castAndCrewResponse = movieService.fetchCastAndCrew(movieId)
-            movieMapper.toMovie(detailsResponse, castAndCrewResponse)
+    override fun movieDetails(): Flow<Movie> = combine(
+        movieDetailsIdPublisher
+            .filterNotNull()
+            .mapLatest { movieId ->
+                movieService.fetchMovieDetails(movieId) to movieService.fetchCastAndCrew(movieId)
+            },
+        dao.fetchMovies()
+    ) { (movieDetails, castAndCrew), favouriteMovies ->
+        val isFavourite = favouriteMovies.find { dbMovie -> dbMovie.id == movieDetails?.id } != null
+        movieMapper.toMovie(movieDetails, castAndCrew, isFavourite)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override fun favouriteMovies(): Flow<List<Movie>> = dao.fetchMovies()
+        .mapLatest {
+            movieMapper.toFavouriteMovies(it)
         }
 
     override suspend fun refreshTrendingMovies(timeWindow: String) =
@@ -61,8 +89,15 @@ class MovieRepositoryImpl(
     override suspend fun refreshForYouMovies(type: ForYouType) =
         refreshForYouMoviesPublisher.emit(type)
 
+    override suspend fun refreshMovieDetails(movieId: Int) = movieDetailsIdPublisher.emit(movieId)
+
     override suspend fun refreshDiscoverMovies(showType: ShowType) =
         refreshDiscoverMoviesPublisher.emit(showType)
 
-    override suspend fun refreshMovieDetails(movieId: Int) = movieDetailsIdPublisher.emit(movieId)
+    override suspend fun removeFromFavourites(movie: Movie) =
+        dao.deleteMovie(movieMapper.toDbMovie(movie))
+
+    override suspend fun insertFavouriteMovie(movie: Movie) {
+        dao.insertMovie(movieMapper.toDbMovie(movie))
+    }
 }

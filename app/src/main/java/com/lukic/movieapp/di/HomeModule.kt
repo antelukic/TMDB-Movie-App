@@ -13,7 +13,7 @@ val homeModule = module {
 
     single<MovieMapper> { MovieMapperImpl() }
 
-    single<MovieRepository> { MovieRepositoryImpl(get(), get()) }
+    single<MovieRepository> { MovieRepositoryImpl(get(), get(), get()) }
 
     single { QueryForYouMovies(get()) }
     single { QueryDiscoverShows(get()) }
@@ -22,5 +22,5 @@ val homeModule = module {
     single { RefreshDiscoverMovies(get()) }
     single { RefreshForYouMovies(get()) }
 
-    viewModel { HomeViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { HomeViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
 }

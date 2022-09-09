@@ -1,0 +1,11 @@
+package com.lukic.domain.usecase
+
+import com.lukic.domain.model.Movie
+import com.lukic.domain.repository.MovieRepository
+import kotlinx.coroutines.flow.Flow
+
+class QueryFavouriteMovies(private val repository: MovieRepository) :
+    QueryUseCase<List<Movie>> {
+
+    override fun invoke(): Flow<List<Movie>> = repository.favouriteMovies()
+}

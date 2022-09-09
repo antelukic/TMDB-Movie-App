@@ -10,7 +10,8 @@ data class Movie(
     val releaseDate: String,
     val duration: String,
     val cast: List<Cast>,
-    val posterPath: String
+    val posterPath: String,
+    val isFavourite: Boolean
 ) {
     companion object {
         val EMPTY_MOVIE = Movie(
@@ -23,7 +24,8 @@ data class Movie(
             releaseDate = "",
             duration = "",
             cast = emptyList(),
-            posterPath = ""
+            posterPath = "",
+            isFavourite = false
         )
     }
 }

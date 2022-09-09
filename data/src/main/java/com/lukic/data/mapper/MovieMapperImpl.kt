@@ -7,6 +7,7 @@ import com.lukic.data.api.model.ForYouApi.Popular
 import com.lukic.data.api.model.ForYouApi.TopRated
 import com.lukic.data.api.model.ShowTypeApi.NowPlaying
 import com.lukic.data.api.model.ShowTypeApi.Upcoming
+import com.lukic.data.database.DbMovie
 import com.lukic.domain.model.*
 import com.lukic.domain.model.ForYouType.POPULAR
 import com.lukic.domain.model.ForYouType.TOP_RATED
@@ -19,7 +20,10 @@ private const val RATING_FACTOR = 10
 
 class MovieMapperImpl : MovieMapper {
 
-    override fun toMovies(apiMovies: List<ApiMovie>?): List<Movie> =
+    override fun toMovies(
+        apiMovies: List<ApiMovie>?,
+        favouriteMovies: List<DbMovie>?
+    ): List<Movie> =
         apiMovies?.map { apiMovie ->
             with(apiMovie) {
                 Movie(
@@ -32,7 +36,27 @@ class MovieMapperImpl : MovieMapper {
                     duration = "",
                     cast = emptyList(),
                     posterPath = posterPath,
-                    crew = emptyList()
+                    crew = emptyList(),
+                    isFavourite = favouriteMovies?.firstOrNull { it.id == id } != null
+                )
+            }
+        } ?: emptyList()
+
+    override fun toFavouriteMovies(dbMovies: List<DbMovie>?): List<Movie> =
+        dbMovies?.map { dbMovie ->
+            with(dbMovie) {
+                Movie(
+                    id = this.id,
+                    title = "",
+                    overview = "",
+                    rating = 0,
+                    genres = emptyList(),
+                    releaseDate = "",
+                    duration = "",
+                    cast = emptyList(),
+                    posterPath = posterPath,
+                    crew = emptyList(),
+                    isFavourite = true
                 )
             }
         } ?: emptyList()
@@ -40,7 +64,8 @@ class MovieMapperImpl : MovieMapper {
     @RequiresApi(Build.VERSION_CODES.GINGERBREAD)
     override fun toMovie(
         apiMovieDetails: ApiMovieDetails?,
-        castAndCrew: ApiCastAndCrew?
+        castAndCrew: ApiCastAndCrew?,
+        isFavourite: Boolean
     ): Movie = apiMovieDetails?.let { movieDetails ->
         with(movieDetails) {
             Movie(
@@ -53,10 +78,19 @@ class MovieMapperImpl : MovieMapper {
                 releaseDate = releaseDate,
                 duration = fromMinutesToHHmm(runtime),
                 cast = fromApiCastToCast(castAndCrew),
-                posterPath = posterPath ?: ""
+                posterPath = posterPath ?: "",
+                isFavourite = isFavourite
             )
         }
     } ?: Movie.EMPTY_MOVIE
+
+    override fun toDbMovie(movie: Movie): DbMovie =
+        with(movie) {
+            DbMovie(
+                id = id,
+                posterPath = posterPath
+            )
+        }
 
     override fun fromApiCastToCast(apiCastAndCrew: ApiCastAndCrew?): List<Cast> =
         apiCastAndCrew?.cast?.map { apiCast ->
@@ -84,7 +118,7 @@ class MovieMapperImpl : MovieMapper {
     override fun fromMinutesToHHmm(minutes: Int): String {
         val hours = TimeUnit.MINUTES.toHours(minutes.toLong())
         val remainMinutes = minutes - TimeUnit.HOURS.toMinutes(hours)
-        return String.format("%02d:%02d", hours, remainMinutes)
+        return String.format("%2dh:%02dm", hours, remainMinutes)
     }
 
     override fun toShowTypeApi(type: ShowType): ShowTypeApi =

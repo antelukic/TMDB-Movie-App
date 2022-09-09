@@ -12,7 +12,8 @@ data class MovieDetailsUIState(
     val releaseDate: String,
     val duration: String,
     val cast: List<Cast>,
-    val posterPath: String
+    val posterPath: String,
+    val isFavourite: Boolean
 ) {
     companion object {
         val DEFAULT = MovieDetailsUIState(
@@ -24,7 +25,8 @@ data class MovieDetailsUIState(
             releaseDate = "",
             duration = "",
             cast = emptyList(),
-            posterPath = ""
+            posterPath = "",
+            isFavourite = false
         )
     }
 }

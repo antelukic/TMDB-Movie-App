@@ -44,6 +44,5 @@ class CastDiffCallback : DiffUtil.ItemCallback<Cast>() {
 
     override fun areItemsTheSame(oldItem: Cast, newItem: Cast): Boolean = oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: Cast, newItem: Cast): Boolean =
-        areItemsTheSame(oldItem, newItem)
+    override fun areContentsTheSame(oldItem: Cast, newItem: Cast): Boolean = oldItem == newItem
 }

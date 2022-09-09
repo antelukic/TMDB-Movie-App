@@ -10,9 +10,11 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
 class HomeViewModel(
-    private val queryTrendingMovies: QueryTrendingMovies,
-    private val queryDiscoverShows: QueryDiscoverShows,
-    private val queryForYouMovies: QueryForYouMovies,
+    queryTrendingMovies: QueryTrendingMovies,
+    queryDiscoverShows: QueryDiscoverShows,
+    queryForYouMovies: QueryForYouMovies,
+    private val removeFavouriteMovie: RemoveFavouriteMovie,
+    private val addFavouriteMovie: AddFavouriteMovie,
     private val refreshTrendingMovies: RefreshTrendingMovies,
     private val refreshDiscoverMovies: RefreshDiscoverMovies,
     private val refreshForYouMovies: RefreshForYouMovies
@@ -30,19 +32,17 @@ class HomeViewModel(
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     init {
-        scope.launch {
-            queryTrendingMovies()
-                .onEach { movies -> _trendingUIState.update { fromMoviesToHomeMovieUIStates(movies) } }
-                .launchIn(scope)
+        queryTrendingMovies()
+            .onEach { movies -> _trendingUIState.update { fromMoviesToHomeMovieUIStates(movies) } }
+            .launchIn(scope)
 
-            queryForYouMovies()
-                .onEach { movies -> _forYouUIState.update { fromMoviesToHomeMovieUIStates(movies) } }
-                .launchIn(scope)
+        queryForYouMovies()
+            .onEach { movies -> _forYouUIState.update { fromMoviesToHomeMovieUIStates(movies) } }
+            .launchIn(scope)
 
-            queryDiscoverShows()
-                .onEach { movies -> _discoverUIState.update { fromMoviesToHomeMovieUIStates(movies) } }
-                .launchIn(scope)
-        }
+        queryDiscoverShows()
+            .onEach { movies -> _discoverUIState.update { fromMoviesToHomeMovieUIStates(movies) } }
+            .launchIn(scope)
     }
 
     fun refreshTrendingMovies(timeWindow: String) {
@@ -63,12 +63,38 @@ class HomeViewModel(
         }
     }
 
+    fun refreshFavouriteMovies(movieState: HomeMovieUIState) {
+        scope.launch {
+            val movie = mapStateToMovie(movieState)
+            if (movie.isFavourite) removeFavouriteMovie(movie)
+            else addFavouriteMovie(movie)
+        }
+    }
+
+    private fun mapStateToMovie(movieState: HomeMovieUIState) =
+        with(movieState) {
+            Movie(
+                id = movieID,
+                title = "",
+                overview = "",
+                rating = 0,
+                genres = emptyList(),
+                crew = emptyList(),
+                releaseDate = "",
+                duration = "",
+                cast = emptyList(),
+                posterPath = posterPath.removePrefix(BuildConfig.DOMAIN_BASE_IMAGE),
+                isFavourite = isFavourite
+            )
+        }
+
     private fun fromMoviesToHomeMovieUIStates(movies: List<Movie>): List<HomeMovieUIState> =
         movies.map { movie ->
             with(movie) {
                 HomeMovieUIState(
                     movieID = id,
-                    posterPath = BuildConfig.DOMAIN_BASE_IMAGE + posterPath
+                    posterPath = BuildConfig.DOMAIN_BASE_IMAGE + posterPath,
+                    isFavourite = isFavourite
                 )
             }
         }

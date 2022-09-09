@@ -14,8 +14,8 @@
     <dimen name="text_billed_cast_margin_top">44dp</dimen>
     <dimen name="rv_margin_bottom">48dp</dimen>
     <dimen name="image_margin_all">8dp</dimen>
-    <dimen name="image_height">180dp</dimen>
-    <dimen name="image_width">120dp</dimen>
+    <dimen name="movie_image_height">180dp</dimen>
+    <dimen name="movie_image_width">120dp</dimen>
     <dimen name="image_margin_end">8dp</dimen>
     <dimen name="details_image_height">364dp</dimen>
     <dimen name="details_progress_indicator_margin_top">108dp</dimen>
@@ -54,4 +54,18 @@
     <dimen name="cast_name_margin_start">4dp</dimen>
     <dimen name="cast_name_text_size">16sp</dimen>
     <dimen name="home_cancel_text_size">16sp</dimen>
+    <dimen name="favourites_text_size">20sp</dimen>
+    <dimen name="favourites_text_margin_start">16sp</dimen>
+    <dimen name="favourites_text_margin_top">36sp</dimen>
+    <dimen name="favourites_rv_margin_top">8sp</dimen>
+    <dimen name="favourites_horizontal_margin">12dp</dimen>
+    <dimen name="favourites_image_width">112dp</dimen>
+    <dimen name="favourites_image_height">160dp</dimen>
+    <dimen name="favourites_image_horizontal_margin">4dp</dimen>
+    <dimen name="favourites_image_vertical_margin">8dp</dimen>
+    <dimen name="bottom_nav_elevation">4dp</dimen>
+    <dimen name="favourites_rv_padding">8dp</dimen>
+    <dimen name="favourite_selector_margin_bottom">20dp</dimen>
+    <dimen name="arrow_back_padding">16dp</dimen>
+    <dimen name="favourite_selector_margin_start">20dp</dimen>
 </resources>

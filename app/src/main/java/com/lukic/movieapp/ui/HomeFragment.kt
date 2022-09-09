@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.lukic.data.repository.DAY_TIME_WINDOW
@@ -17,11 +16,10 @@ import com.lukic.domain.model.ForYouType
 import com.lukic.domain.model.ShowType
 import com.lukic.movieapp.databinding.FragmentHomeBinding
 import com.lukic.movieapp.ui.adapters.MovieAdapter
+import com.lukic.movieapp.utils.MovieItemAnimator
 import com.lukic.movieapp.utils.TabSelectedListener
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
-private const val DETAILS_IMAGE_ID = "details_image"
 
 class HomeFragment : Fragment() {
 
@@ -50,9 +48,18 @@ class HomeFragment : Fragment() {
                     homeCancelText.visibility = View.VISIBLE
             }
 
-            homeTrendingMovies.adapter = trendingMovieAdapter
-            homeForYouMovies.adapter = forYouMovieAdapter
-            homeDiscoverMovies.adapter = discoverMovieAdapter
+            homeTrendingMovies.apply {
+                adapter = trendingMovieAdapter
+                itemAnimator = MovieItemAnimator()
+            }
+            homeForYouMovies.apply {
+                adapter = forYouMovieAdapter
+                itemAnimator = MovieItemAnimator()
+            }
+            homeDiscoverMovies.apply {
+                adapter = discoverMovieAdapter
+                itemAnimator = MovieItemAnimator()
+            }
 
             homeCancelText.setOnClickListener {
                 homeSearchEditText.text?.clear()
@@ -65,19 +72,28 @@ class HomeFragment : Fragment() {
 
     private fun initAdapters() {
         forYouMovieAdapter = MovieAdapter(
-            onClick = { id, view ->
-                onItemClick(id, view)
+            onCardClick = { id ->
+                onItemClick(id)
+            },
+            onFavouriteClick = { movieState ->
+                homeViewModel.refreshFavouriteMovies(movieState)
             }
         )
         discoverMovieAdapter = MovieAdapter(
-            onClick = { id, view ->
-                onItemClick(id, view)
+            onCardClick = { id ->
+                onItemClick(id)
+            },
+            onFavouriteClick = { movieState ->
+                homeViewModel.refreshFavouriteMovies(movieState)
             }
         )
 
         trendingMovieAdapter = MovieAdapter(
-            onClick = { id, view ->
-                onItemClick(id, view)
+            onCardClick = { id ->
+                onItemClick(id)
+            },
+            onFavouriteClick = { movieState ->
+                homeViewModel.refreshFavouriteMovies(movieState)
             }
         )
     }
@@ -137,13 +153,8 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun onItemClick(id: Int, view: View) {
-        val extras = FragmentNavigatorExtras(view to DETAILS_IMAGE_ID)
-        findNavController().navigate(
-            HomeFragmentDirections.actionHomeFragmentToDetailsFragment(id),
-            extras
-        )
-    }
+    private fun onItemClick(id: Int) =
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(id))
 
     override fun onDestroyView() {
         super.onDestroyView()

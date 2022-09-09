@@ -11,5 +11,13 @@ val detailsModule = module {
     single { QueryMovieDetails(get()) }
     single { RefreshMovieDetails(get()) }
 
-    viewModel { parameters -> DetailsViewModel(get(), get(), movieID = parameters.get()) }
+    viewModel { parameters ->
+        DetailsViewModel(
+            get(),
+            get(),
+            get(),
+            get(),
+            movieID = parameters.get()
+        )
+    }
 }

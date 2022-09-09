@@ -1,6 +1,7 @@
 package com.lukic.movieapp.ui
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
@@ -11,9 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.lukic.movieapp.MainActivity
 import com.lukic.movieapp.R
 import com.lukic.movieapp.databinding.FragmentDetailsBinding
 import com.lukic.movieapp.ui.adapters.CastAdapter
@@ -31,13 +32,18 @@ class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
     private val binding: FragmentDetailsBinding get() = _binding!!
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as MainActivity).apply {
+            hideBottomNav()
+            showBackButton()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val animation = TransitionInflater.from(requireContext()).inflateTransition(
-            android.R.transition.slide_left,
-        )
-        sharedElementEnterTransition = animation
-        sharedElementReturnTransition = animation
+        val inflater = TransitionInflater.from(requireContext())
+        enterTransition = inflater.inflateTransition(R.transition.fade)
     }
 
     override fun onCreateView(
@@ -55,10 +61,6 @@ class DetailsFragment : Fragment() {
                     }
                 }
             }
-        }
-
-        binding.detailsBack.setOnClickListener {
-            findNavController().navigateUp()
         }
 
         return binding.root
@@ -86,6 +88,16 @@ class DetailsFragment : Fragment() {
             detailsTotaltimeText.text = movieDetails.duration
             detailsDescriptionText.text = movieDetails.overview
             setMovieCredits(movieDetails)
+
+            with(detailsFavouriteSelector) {
+                setImageResource(
+                    if (movieDetails.isFavourite) R.drawable.ic_filled_heart_with_background
+                    else R.drawable.ic_heart
+                )
+                setOnClickListener {
+                    detailsViewModel.refreshFavouriteMovies()
+                }
+            }
 
             detailsCastMembers.adapter = CastAdapter().also { castAdapter ->
                 castAdapter.submitList(movieDetails.cast)
@@ -124,5 +136,18 @@ class DetailsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onDetach() {
+        (activity as MainActivity).apply {
+            showBottomNav()
+            hideBackButton()
+        }
+        super.onDetach()
     }
 }
