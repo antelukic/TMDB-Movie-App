@@ -14,6 +14,7 @@ import com.lukic.data.repository.DAY_TIME_WINDOW
 import com.lukic.data.repository.WEEK_TIME_WINDOW
 import com.lukic.domain.model.ForYouType
 import com.lukic.domain.model.ShowType
+import com.lukic.movieapp.MOVIE_ID_KEY
 import com.lukic.movieapp.databinding.FragmentHomeBinding
 import com.lukic.movieapp.ui.adapters.MovieAdapter
 import com.lukic.movieapp.utils.MovieItemAnimator
@@ -143,7 +144,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun onItemClick(id: Int) =
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(id))
+        findNavController().currentBackStackEntry?.savedStateHandle?.set(MOVIE_ID_KEY, id)
 
     override fun onDestroyView() {
         super.onDestroyView()

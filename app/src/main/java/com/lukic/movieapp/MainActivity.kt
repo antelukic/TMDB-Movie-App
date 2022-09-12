@@ -7,6 +7,9 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.lukic.movieapp.databinding.ActivityMainBinding
+import com.lukic.movieapp.ui.DetailsFragment
+
+const val MOVIE_ID_KEY = "movieId"
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,27 +26,48 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.main_fragmentcontainer) as NavHostFragment
         navController = navHostFragment.navController
 
-        binding.mainBack.setOnClickListener {
-            navController.navigateUp()
-        }
+        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<Int>(MOVIE_ID_KEY)
+            ?.observe(this) { id ->
+                setDetailsFragment(id)
+                showBackButton()
+                binding.mainContainerWithBottomNav.visibility = View.GONE
+                binding.mainFragmentcontainerDetails.visibility = View.VISIBLE
+            }
 
+        binding.mainBack.setOnClickListener(backButtonClickListener())
         binding.mainBottomNavigation.setupWithNavController(navController)
     }
 
-    fun showBackButton() {
+    private fun setDetailsFragment(id: Int) {
+        val bundle = Bundle()
+        bundle.putInt("movieId", id)
+        val detailsFragment = DetailsFragment()
+        detailsFragment.arguments = bundle
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_fragmentcontainer_details, detailsFragment)
+            .commit()
+    }
+
+    private fun backButtonClickListener() = View.OnClickListener {
+        binding.mainContainerWithBottomNav.visibility = View.VISIBLE
+        binding.mainFragmentcontainerDetails.visibility = View.GONE
+        hideBackButton()
+    }
+
+    private fun showBackButton() {
         binding.mainBack.visibility = View.VISIBLE
     }
 
-    fun hideBackButton() {
+    private fun hideBackButton() {
         binding.mainBack.visibility = View.GONE
     }
 
-    fun hideBottomNav() {
-        binding.mainBottomNavigation.visibility = View.GONE
-    }
-
-    fun showBottomNav() {
-        binding.mainBottomNavigation.visibility = View.VISIBLE
+    override fun onBackPressed() {
+        if (binding.mainFragmentcontainerDetails.visibility == View.VISIBLE) {
+            backButtonClickListener().onClick(binding.root)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean = navController.navigateUp()

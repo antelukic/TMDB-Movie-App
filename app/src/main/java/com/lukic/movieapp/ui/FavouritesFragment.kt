@@ -9,6 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.lukic.movieapp.MOVIE_ID_KEY
 import com.lukic.movieapp.databinding.FragmentFavouritesBinding
 import com.lukic.movieapp.ui.adapters.FavouritesAdapter
 import kotlinx.coroutines.launch
@@ -30,10 +31,9 @@ class FavouritesFragment : Fragment() {
 
         adapter = FavouritesAdapter(
             onImageClick = { movieId ->
-                findNavController().navigate(
-                    FavouritesFragmentDirections.actionFavouritesFragmentToDetailsFragment(
-                        movieId
-                    )
+                findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                    MOVIE_ID_KEY,
+                    movieId
                 )
             },
             onFavouritesSelectorClicked = { movieId ->

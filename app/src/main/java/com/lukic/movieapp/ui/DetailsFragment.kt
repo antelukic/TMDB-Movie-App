@@ -1,7 +1,6 @@
 package com.lukic.movieapp.ui
 
 import android.animation.ObjectAnimator
-import android.content.Context
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
@@ -12,9 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.navArgs
 import coil.load
-import com.lukic.movieapp.MainActivity
 import com.lukic.movieapp.R
 import com.lukic.movieapp.databinding.FragmentDetailsBinding
 import com.lukic.movieapp.ui.adapters.CastAdapter
@@ -32,19 +29,10 @@ private const val INDICATOR_ANIMATION_DURATION = 1000L
 
 class DetailsFragment : Fragment() {
 
-    private val navArgs by navArgs<DetailsFragmentArgs>()
-    private val detailsViewModel by viewModel<DetailsViewModel> { parametersOf(navArgs.id) }
+    private val detailsViewModel by viewModel<DetailsViewModel> { parametersOf(arguments?.getInt("movieId")) }
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding: FragmentDetailsBinding get() = _binding!!
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (activity as MainActivity).apply {
-            hideBottomNav()
-            showBackButton()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -158,13 +146,5 @@ class DetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onDetach() {
-        (activity as MainActivity).apply {
-            showBottomNav()
-            hideBackButton()
-        }
-        super.onDetach()
     }
 }
