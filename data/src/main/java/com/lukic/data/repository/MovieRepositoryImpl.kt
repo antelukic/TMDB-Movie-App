@@ -29,6 +29,8 @@ class MovieRepositoryImpl(
 
     private val movieDetailsIdPublisher = MutableStateFlow<Int?>(null)
 
+    private val searchQueryPublisher = MutableStateFlow<String?>(null)
+
     @RequiresApi(Build.VERSION_CODES.N)
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun trendingMovies(): Flow<List<Movie>> = combine(
@@ -83,6 +85,13 @@ class MovieRepositoryImpl(
             movieMapper.toFavouriteMovies(it)
         }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override fun searchMovies(): Flow<List<Movie>> = searchQueryPublisher
+        .filterNotNull()
+        .mapLatest { query ->
+            movieMapper.toMovies(movieService.fetchSearchMovies(query)?.movies, emptyList())
+        }
+
     override suspend fun refreshTrendingMovies(timeWindow: String) =
         refreshTrendingMoviesPublisher.emit(timeWindow)
 
@@ -97,7 +106,8 @@ class MovieRepositoryImpl(
     override suspend fun removeFromFavourites(movie: Movie) =
         dao.deleteMovie(movieMapper.toDbMovie(movie))
 
-    override suspend fun insertFavouriteMovie(movie: Movie) {
+    override suspend fun insertFavouriteMovie(movie: Movie) =
         dao.insertMovie(movieMapper.toDbMovie(movie))
-    }
+
+    override suspend fun refreshSearchMovies(query: String) = searchQueryPublisher.emit(query)
 }

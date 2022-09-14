@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SearchFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/search_searchbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_text_margin_all"
+            android:layout_weight="1"
+            android:textColorHint="@color/dark_blue_primary"
+            android:theme="@style/TextInputLayoutAppearance"
+            app:boxCornerRadiusBottomEnd="@dimen/common_card_radius"
+            app:boxCornerRadiusBottomStart="@dimen/common_card_radius"
+            app:boxCornerRadiusTopEnd="@dimen/common_card_radius"
+            app:boxCornerRadiusTopStart="@dimen/common_card_radius"
+            app:boxStrokeColor="@android:color/transparent"
+            app:boxStrokeWidth="@dimen/box_stroke_width"
+            app:boxStrokeWidthFocused="@dimen/box_stroke_width"
+            app:endIconDrawable="@drawable/ic_baseline_clear_24"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/dark_blue_primary"
+            app:hintEnabled="false"
+            app:hintTextColor="@color/dark_blue_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_magnifier"
+            app:startIconTint="@color/dark_blue_primary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/search"
+                android:singleLine="true"
+                android:textSize="@dimen/home_searchbox_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/search_movies_horizontal_margin"
+            android:layout_marginTop="@dimen/search_movies_margin_top"
+            android:layout_marginEnd="@dimen/search_movies_horizontal_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_searchbox">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_movies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/search_movies_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

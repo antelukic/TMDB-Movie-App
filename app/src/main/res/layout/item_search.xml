@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/search_movie_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="@dimen/common_card_radius"
+        app:cardElevation="@dimen/search_card_elevation"
+        android:layout_marginTop="@dimen/search_card_vertical_margin"
+        android:layout_marginBottom="@dimen/search_card_vertical_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/search_image"
+                android:layout_width="@dimen/search_image_width"
+                android:layout_height="@dimen/search_dimen_height"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/search_movie_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/search_movie_title_text_size"
+                android:fontFamily="@font/nunito_sans_extrabold"
+                android:textColor="@color/dark_blue_primary"
+                android:layout_marginStart="@dimen/common_text_margin_start"
+                android:layout_marginEnd="@dimen/common_text_margin_end"
+                android:padding="@dimen/common_text_padding"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/search_image"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/search_movie_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/search_movie_description_text_size"
+                android:fontFamily="@font/nunito_sans"
+                android:textColor="@color/gray_600"
+                android:layout_marginStart="@dimen/common_text_margin_start"
+                android:layout_marginEnd="@dimen/common_text_margin_end"
+                android:maxLines="5"
+                android:ellipsize="end"
+                android:padding="@dimen/common_text_padding"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_movie_title"
+                app:layout_constraintStart_toEndOf="@id/search_image"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

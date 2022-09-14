@@ -43,11 +43,6 @@ class HomeFragment : Fragment() {
         collectStates()
 
         with(binding) {
-            homeSearchEditText.setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus)
-                    homeCancelText.visibility = View.VISIBLE
-            }
-
             homeTrendingMovies.apply {
                 adapter = trendingMovieAdapter
                 itemAnimator = MovieItemAnimator()
@@ -59,12 +54,6 @@ class HomeFragment : Fragment() {
             homeDiscoverMovies.apply {
                 adapter = discoverMovieAdapter
                 itemAnimator = MovieItemAnimator()
-            }
-
-            homeCancelText.setOnClickListener {
-                homeSearchEditText.text?.clear()
-                homeSearchEditText.clearFocus()
-                it.visibility = View.GONE
             }
         }
         return binding.root

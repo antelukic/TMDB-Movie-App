@@ -2,10 +2,12 @@ package com.lukic.movieapp.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.lukic.movieapp.BuildConfig
 import com.lukic.movieapp.R
 import com.lukic.movieapp.databinding.ItemFavouritesBinding
 import com.lukic.movieapp.ui.FavouritesUIState
@@ -26,9 +28,8 @@ class FavouritesAdapter(
             )
         )
 
-    override fun onBindViewHolder(holder: FavouritesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavouritesViewHolder, position: Int) =
         holder.bind(getItem(position))
-    }
 
     inner class FavouritesViewHolder(private val binding: ItemFavouritesBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -36,7 +37,12 @@ class FavouritesAdapter(
         fun bind(movie: FavouritesUIState) {
             with(binding) {
                 favouritesImage.apply {
-                    load(movie.posterPath)
+                    if (movie.posterPath.removePrefix(BuildConfig.DOMAIN_BASE_IMAGE).isEmpty()) {
+                        setImageResource(R.drawable.tmdb_logo)
+                    } else {
+                        scaleType = ImageView.ScaleType.CENTER_CROP
+                        load(movie.posterPath)
+                    }
                     setOnClickListener {
                         onImageClick(movie.movieID)
                     }

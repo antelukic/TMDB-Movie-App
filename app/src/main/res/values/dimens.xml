@@ -46,14 +46,13 @@
     <dimen name="details_cast_rv_margin_start">4dp</dimen>
     <dimen name="home_searchbox_text_size">16sp</dimen>
     <dimen name="home_whatsnew_text_margin_top">20dp</dimen>
-    <dimen name="home_whatsnew_margin_end">20dp</dimen>
+    <dimen name="home_foryou_margin_end">20dp</dimen>
     <dimen name="home_whatsnew_text_size">20sp</dimen>
     <dimen name="home_text_margin_top">44dp</dimen>
     <dimen name="home_text_margin_end">20dp</dimen>
     <dimen name="home_text_size">20sp</dimen>
     <dimen name="cast_name_margin_start">4dp</dimen>
     <dimen name="cast_name_text_size">16sp</dimen>
-    <dimen name="home_cancel_text_size">16sp</dimen>
     <dimen name="favourites_text_size">20sp</dimen>
     <dimen name="favourites_text_margin_start">16sp</dimen>
     <dimen name="favourites_text_margin_top">36sp</dimen>
@@ -68,4 +67,14 @@
     <dimen name="favourite_selector_margin_bottom">20dp</dimen>
     <dimen name="arrow_back_padding">16dp</dimen>
     <dimen name="favourite_selector_margin_start">20dp</dimen>
+    <dimen name="search_movies_margin_top">32dp</dimen>
+    <dimen name="search_movies_horizontal_margin">16dp</dimen>
+    <dimen name="search_movies_padding">8dp</dimen>
+    <dimen name="search_image_width">100dp</dimen>
+    <dimen name="search_dimen_height">140dp</dimen>
+    <dimen name="search_movie_title_text_size">16sp</dimen>
+    <dimen name="search_movie_description_text_size">12sp</dimen>
+    <dimen name="search_card_vertical_margin">4dp</dimen>
+    <dimen name="search_card_elevation">4dp</dimen>
+    <dimen name="home_foryou_margin_start">20dp</dimen>
 </resources>

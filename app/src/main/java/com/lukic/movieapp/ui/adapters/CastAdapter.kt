@@ -2,11 +2,14 @@ package com.lukic.movieapp.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.lukic.domain.model.Cast
+import com.lukic.movieapp.BuildConfig
+import com.lukic.movieapp.R
 import com.lukic.movieapp.databinding.ItemCastBinding
 
 class CastAdapter :
@@ -23,9 +26,8 @@ class CastAdapter :
         )
     }
 
-    override fun onBindViewHolder(holder: CastViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CastViewHolder, position: Int) =
         holder.bind(getItem(position))
-    }
 
     inner class CastViewHolder(private val binding: ItemCastBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -34,7 +36,14 @@ class CastAdapter :
             with(binding) {
                 castName.text = cast.name
                 castRoleName.text = cast.roleName
-                castImage.load(cast.posterPath)
+                castImage.apply {
+                    if (cast.posterPath.removePrefix(BuildConfig.DOMAIN_BASE_IMAGE).isEmpty()) {
+                        setImageResource(R.drawable.tmdb_logo)
+                    } else {
+                        scaleType = ImageView.ScaleType.CENTER_CROP
+                        load(cast.posterPath)
+                    }
+                }
             }
         }
     }

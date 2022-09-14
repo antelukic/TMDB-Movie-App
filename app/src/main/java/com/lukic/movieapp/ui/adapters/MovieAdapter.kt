@@ -2,10 +2,12 @@ package com.lukic.movieapp.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.lukic.movieapp.BuildConfig
 import com.lukic.movieapp.R
 import com.lukic.movieapp.databinding.ItemMovieBinding
 import com.lukic.movieapp.ui.HomeMovieUIState
@@ -20,9 +22,8 @@ class MovieAdapter(
         return MovieViewHolder(ItemMovieBinding.inflate(inflater, parent, false))
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) =
         holder.bind(this.getItem(position))
-    }
 
     inner class MovieViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -33,7 +34,12 @@ class MovieAdapter(
                     setOnClickListener {
                         onCardClick(movie.movieID)
                     }
-                    load(movie.posterPath)
+                    if (movie.posterPath.removePrefix(BuildConfig.DOMAIN_BASE_IMAGE).isEmpty()) {
+                        setImageResource(R.drawable.tmdb_logo)
+                    } else {
+                        scaleType = ImageView.ScaleType.CENTER_CROP
+                        load(movie.posterPath)
+                    }
                 }
                 with(movieFavouritesSelector) {
                     setImageResource(

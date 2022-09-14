@@ -10,74 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/home_search_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_text_margin_all"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/home_searchbox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColorHint="@color/dark_blue_primary"
-                android:theme="@style/TextInputLayoutAppearance"
-                app:boxCornerRadiusBottomEnd="@dimen/common_card_radius"
-                app:boxCornerRadiusBottomStart="@dimen/common_card_radius"
-                app:boxCornerRadiusTopEnd="@dimen/common_card_radius"
-                app:boxCornerRadiusTopStart="@dimen/common_card_radius"
-                app:boxStrokeColor="@android:color/transparent"
-                app:boxStrokeWidth="@dimen/box_stroke_width"
-                app:boxStrokeWidthFocused="@dimen/box_stroke_width"
-                app:endIconDrawable="@drawable/ic_baseline_clear_24"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/dark_blue_primary"
-                app:hintEnabled="false"
-                app:hintTextColor="@color/dark_blue_primary"
-                app:startIconDrawable="@drawable/ic_magnifier"
-                app:startIconTint="@color/dark_blue_primary">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/home_search_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/search"
-                    android:maxLines="1"
-                    android:textSize="@dimen/home_searchbox_text_size" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/home_cancel_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:fontFamily="@font/nunito_sans"
-                android:text="@string/cancel"
-                android:textAlignment="center"
-                android:textColor="@color/dark_blue_primary"
-                android:textSize="@dimen/home_cancel_text_size"
-                android:visibility="gone" />
-        </LinearLayout>
-
         <TextView
             android:id="@+id/home_foryou_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/home_whatsnew_text_margin_top"
-            android:layout_marginEnd="@dimen/home_whatsnew_margin_end"
+            android:layout_marginEnd="@dimen/home_foryou_margin_end"
+            android:layout_marginStart="@dimen/home_foryou_margin_start"
             android:fontFamily="@font/nunito_sans_bold"
             android:text="@string/for_you"
             android:textColor="@color/dark_blue_primary"
             android:textSize="@dimen/home_whatsnew_text_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/home_search_layout"
-            app:layout_constraintTop_toBottomOf="@id/home_search_layout" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/home_foryou_tabs"

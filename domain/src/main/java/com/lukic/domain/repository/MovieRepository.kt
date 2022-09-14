@@ -17,6 +17,8 @@ interface MovieRepository {
 
     fun favouriteMovies(): Flow<List<Movie>>
 
+    fun searchMovies(): Flow<List<Movie>>
+
     suspend fun refreshTrendingMovies(timeWindow: String)
 
     suspend fun refreshForYouMovies(type: ForYouType)
@@ -28,4 +30,6 @@ interface MovieRepository {
     suspend fun insertFavouriteMovie(movie: Movie)
 
     suspend fun refreshMovieDetails(movieId: Int)
+
+    suspend fun refreshSearchMovies(query: String)
 }

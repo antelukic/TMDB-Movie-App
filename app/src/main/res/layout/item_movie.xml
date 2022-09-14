@@ -9,7 +9,6 @@
         android:layout_width="@dimen/movie_image_width"
         android:layout_height="@dimen/movie_image_height"
         android:layout_marginEnd="@dimen/image_margin_end"
-        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

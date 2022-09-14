@@ -32,10 +32,10 @@ class MovieMapperImpl : MovieMapper {
                     overview = overview,
                     rating = (voteAverage * RATING_FACTOR).roundToInt(),
                     genres = emptyList(),
-                    releaseDate = releaseDate,
+                    releaseDate = releaseDate ?: "",
                     duration = "",
                     cast = emptyList(),
-                    posterPath = posterPath,
+                    posterPath = posterPath ?: "",
                     crew = emptyList(),
                     isFavourite = favouriteMovies?.firstOrNull { it.id == id } != null
                 )

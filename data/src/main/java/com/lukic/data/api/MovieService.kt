@@ -13,4 +13,6 @@ interface MovieService {
     suspend fun fetchMovieDetails(movieId: Int): ApiMovieDetails?
 
     suspend fun fetchCastAndCrew(movieId: Int): ApiCastAndCrew?
+
+    suspend fun fetchSearchMovies(query: String): ApiMovies?
 }
