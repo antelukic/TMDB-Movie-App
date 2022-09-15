@@ -77,4 +77,5 @@
     <dimen name="search_card_vertical_margin">4dp</dimen>
     <dimen name="search_card_elevation">4dp</dimen>
     <dimen name="home_foryou_margin_start">20dp</dimen>
+    <dimen name="default_edge_padding">0dp</dimen>
 </resources>

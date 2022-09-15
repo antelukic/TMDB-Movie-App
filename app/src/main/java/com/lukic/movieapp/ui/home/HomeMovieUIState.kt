@@ -1,4 +1,4 @@
-package com.lukic.movieapp.ui
+package com.lukic.movieapp.ui.home
 
 data class HomeMovieUIState(
     val movieID: Int,
