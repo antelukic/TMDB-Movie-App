@@ -9,13 +9,10 @@ object AppConfig {
     const val versionCode = 1
     const val versionName = "1.0"
     const val jvmTarget = "1.8"
-    const val proguardDefault = "proguard-android-optimize.txt"
-    const val proguardRulesPro = "proguard-rules.pro"
+    const val kotlinCompilerExtensionVersion = "1.3.1"
 
     const val testIntrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-    const val appModule = ":app"
     const val domainModule = ":domain"
     const val dataModule = ":data"
-    const val rootProjectName = "MovieApp"
 }

@@ -13,18 +13,21 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
 import com.lukic.movieapp.R
 import com.lukic.movieapp.utils.sharedcomposables.MovieBox
+import kotlinx.collections.immutable.ImmutableList
+
+private const val GRID_CELLS = 3
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun FavouriteMovies(
-    movies: List<FavouritesUIState>,
+    movies: ImmutableList<FavouritesUIState>,
     onFavouriteSelectorClick: (FavouritesUIState) -> Unit,
     onImageClick: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
         modifier = modifier,
-        columns = GridCells.Fixed(3),
+        columns = GridCells.Fixed(GRID_CELLS),
         horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.favourites_movies_padding)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.favourites_image_vertical_padding))
     ) {

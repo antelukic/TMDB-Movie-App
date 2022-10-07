@@ -34,8 +34,11 @@ fun MovieBox(
             modifier = Modifier
                 .padding(dimensionResource(id = R.dimen.image_margin_all))
                 .clickable { onFavouriteSelectorClick() },
-            painter = if (isFavourite) painterResource(id = R.drawable.ic_filled_heart_with_background)
-            else painterResource(id = R.drawable.ic_heart),
+            painter = if (isFavourite) {
+                painterResource(id = R.drawable.ic_filled_heart_with_background)
+            } else {
+                painterResource(id = R.drawable.ic_heart)
+            },
             contentDescription = stringResource(R.string.movie_favourite_selector)
         )
     }

@@ -1,6 +1,7 @@
 package com.lukic.movieapp.ui.home
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRowDefaults
@@ -15,23 +16,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.sp
 import com.lukic.movieapp.R
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun HomeTabs(
-    tabs: List<String>,
+    tabs: ImmutableList<String>,
     onTabClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
     edgePadding: Dp = dimensionResource(id = R.dimen.default_edge_padding),
     selectedContentColor: Color = colorResource(id = R.color.dark_blue_primary),
     defaultContentColor: Color = colorResource(id = R.color.gray_600),
     backgroundColor: Color = Color.Transparent,
-    indicatorColor: Color = colorResource(id = R.color.dark_blue_primary)
+    indicatorColor: Color = colorResource(id = R.color.dark_blue_primary),
 ) {
     var selectedIndex by remember { mutableStateOf(0) }
     ScrollableTabRow(
@@ -64,10 +62,12 @@ fun HomeTabs(
                 Text(
                     modifier = Modifier.padding(dimensionResource(id = R.dimen.common_text_padding)),
                     text = tab,
-                    color = if (selectedIndex == index) selectedContentColor
-                    else defaultContentColor,
-                    fontSize = dimensionResource(id = R.dimen.tab_text_size).value.sp,
-                    fontFamily = FontFamily(Font(R.font.proxima_nova_alt_bold, FontWeight.Bold))
+                    color = if (selectedIndex == index) {
+                        selectedContentColor
+                    } else {
+                        defaultContentColor
+                    },
+                    style = MaterialTheme.typography.body1
                 )
             }
         }

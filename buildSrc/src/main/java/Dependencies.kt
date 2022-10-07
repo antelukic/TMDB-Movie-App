@@ -7,7 +7,14 @@ object Dependencies {
     const val navigationFragment = "androidx.navigation:navigation-fragment:${Versions.Android.navigation}"
     const val navigationUi = "androidx.navigation:navigation-ui:${Versions.Android.navigation}"
 
+    const val composeUi = "androidx.compose.ui:ui:${Versions.Compose.version}"
+    const val composeMaterial = "androidx.compose.material:material:${Versions.Compose.version}"
+    const val composeToolingPreview = "androidx.compose.ui:ui-tooling-preview:${Versions.Compose.version}"
+    const val composeCoil = "io.coil-kt:coil-compose:${Versions.Compose.coil}"
+
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.Kotlin.coroutines}"
+    const val immutableCollections =
+        "org.jetbrains.kotlinx:kotlinx-collections-immutable:${Versions.Kotlin.immutableCollections}"
 
     const val ktorCore = "io.ktor:ktor-client-core:${Versions.ktor}"
     const val ktorCio = "io.ktor:ktor-client-cio:${Versions.ktor}"

@@ -39,6 +39,12 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
+
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = AppConfig.kotlinCompilerExtensionVersion
     }
 }
 
@@ -51,6 +57,12 @@ dependencies {
     implementation(Dependencies.navigationFragment)
     implementation(Dependencies.navigationUi)
 
+    implementation(Dependencies.composeUi)
+    implementation(Dependencies.composeMaterial)
+    implementation(Dependencies.composeToolingPreview)
+    implementation(Dependencies.immutableCollections)
+
+    implementation(Dependencies.composeCoil)
     implementation(Dependencies.coil)
 
     implementation(Dependencies.koin)

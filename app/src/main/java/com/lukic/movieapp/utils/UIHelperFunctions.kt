@@ -8,13 +8,15 @@ import com.lukic.movieapp.R
 
 @Composable
 fun movieImage(posterPath: String): Any =
-    if (posterPath.removePrefix(BuildConfig.DOMAIN_BASE_IMAGE).isEmpty())
+    if (posterPath.removePrefix(BuildConfig.DOMAIN_BASE_IMAGE).isEmpty()) {
         painterResource(id = R.drawable.tmdb_logo)
-    else
+    } else {
         posterPath
+    }
 
 fun movieImageContentScale(posterPath: String) =
-    if (posterPath.removePrefix(BuildConfig.DOMAIN_BASE_IMAGE).isEmpty())
+    if (posterPath.removePrefix(BuildConfig.DOMAIN_BASE_IMAGE).isEmpty()) {
         ContentScale.None
-    else
+    } else {
         ContentScale.Crop
+    }

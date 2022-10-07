@@ -12,13 +12,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
 import com.lukic.movieapp.R
 import com.lukic.movieapp.utils.sharedcomposables.MovieBox
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun HomeMovies(
-    movies: List<HomeMovieUIState>,
+    movies: ImmutableList<HomeMovieUIState>,
     onFavouriteSelectorClick: (HomeMovieUIState) -> Unit,
     onImageClick: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     LazyRow(
         modifier = modifier

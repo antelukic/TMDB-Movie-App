@@ -10,6 +10,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.lukic.movieapp.MOVIE_ID_KEY
+import com.lukic.movieapp.ui.theme.MovieTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -22,13 +23,15 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = ComposeView(requireContext()).apply {
         setContent {
-            HomeScreen(
-                modifier = Modifier.fillMaxSize(),
-                homeViewModel = homeViewModel,
-                onImageClick = { id ->
-                    navigateToDetails(id)
-                }
-            )
+            MovieTheme {
+                HomeScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    homeViewModel = homeViewModel,
+                    onImageClick = { id ->
+                        navigateToDetails(id)
+                    }
+                )
+            }
         }
     }
 
