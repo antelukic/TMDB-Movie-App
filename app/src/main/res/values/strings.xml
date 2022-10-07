@@ -19,6 +19,4 @@
     <string name="favourites">Favourites</string>
     <string name="movie">Movie</string>
     <string name="movie_favourite_selector">Movie favourite selector</string>
-    <string name="tmbd_logo">TMBD logo</string>
-    <string name="favourite_movie_selector">Favourite movie selector</string>
 </resources>
