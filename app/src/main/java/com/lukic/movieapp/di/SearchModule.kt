@@ -2,7 +2,7 @@ package com.lukic.movieapp.di
 
 import com.lukic.domain.usecase.QuerySearchMovies
 import com.lukic.domain.usecase.RefreshSearchMovies
-import com.lukic.movieapp.ui.SearchViewModel
+import com.lukic.movieapp.ui.search.SearchViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

@@ -1,4 +1,4 @@
-package com.lukic.movieapp.ui
+package com.lukic.movieapp.ui.search
 
 data class SearchUIState(
     val movieId: Int,

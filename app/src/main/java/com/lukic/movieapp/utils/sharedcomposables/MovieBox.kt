@@ -6,13 +6,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
 import com.lukic.movieapp.R
 import com.lukic.movieapp.utils.movieImage
-import com.lukic.movieapp.utils.movieImageContentScale
 
 @Composable
 fun MovieBox(
@@ -28,7 +28,7 @@ fun MovieBox(
                 .clickable { onImageClick() },
             model = movieImage(posterPath),
             contentDescription = stringResource(R.string.movie),
-            contentScale = movieImageContentScale(posterPath)
+            contentScale = ContentScale.Crop
         )
         Image(
             modifier = Modifier

@@ -1,8 +1,14 @@
 package com.lukic.data.api
 
-import com.lukic.data.api.model.*
-import io.ktor.client.call.*
-import io.ktor.client.request.*
+import com.lukic.data.api.model.ApiCastAndCrew
+import com.lukic.data.api.model.ApiMovieDetails
+import com.lukic.data.api.model.ApiMovies
+import com.lukic.data.api.model.ForYouApi
+import com.lukic.data.api.model.ShowTypeApi
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.client.request.parameter
+import io.ktor.client.request.url
 
 private const val TRENDING_ROUTE = "trending/movie"
 private const val BASE_MOVIE_ROUTE = "movie"
