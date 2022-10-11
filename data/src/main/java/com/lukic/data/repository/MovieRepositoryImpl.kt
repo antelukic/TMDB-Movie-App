@@ -10,7 +10,11 @@ import com.lukic.domain.model.Movie
 import com.lukic.domain.model.ShowType
 import com.lukic.domain.repository.MovieRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.mapLatest
 
 const val DAY_TIME_WINDOW = "day"
 const val WEEK_TIME_WINDOW = "week"

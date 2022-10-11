@@ -37,8 +37,8 @@ fun SearchScreen(
                 labelTextStyle = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.W100),
                 modifier = Modifier
                     .padding(
-                        vertical = dimensionResource(id = R.dimen.common_text_margin_all),
-                        horizontal = dimensionResource(id = R.dimen.common_text_margin_all)
+                        vertical = dimensionResource(id = R.dimen.common_text_padding_all),
+                        horizontal = dimensionResource(id = R.dimen.common_text_padding_all)
                     )
                     .clip(MaterialTheme.shapes.medium)
                     .fillMaxWidth()

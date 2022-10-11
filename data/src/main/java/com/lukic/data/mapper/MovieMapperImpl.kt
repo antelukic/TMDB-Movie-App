@@ -2,15 +2,23 @@ package com.lukic.data.mapper
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.lukic.data.api.model.*
+import com.lukic.data.api.model.ApiCastAndCrew
+import com.lukic.data.api.model.ApiMovie
+import com.lukic.data.api.model.ApiMovieDetails
+import com.lukic.data.api.model.ForYouApi
 import com.lukic.data.api.model.ForYouApi.Popular
 import com.lukic.data.api.model.ForYouApi.TopRated
+import com.lukic.data.api.model.ShowTypeApi
 import com.lukic.data.api.model.ShowTypeApi.NowPlaying
 import com.lukic.data.api.model.ShowTypeApi.Upcoming
 import com.lukic.data.database.DbMovie
-import com.lukic.domain.model.*
+import com.lukic.domain.model.Cast
+import com.lukic.domain.model.Crew
+import com.lukic.domain.model.ForYouType
 import com.lukic.domain.model.ForYouType.POPULAR
 import com.lukic.domain.model.ForYouType.TOP_RATED
+import com.lukic.domain.model.Movie
+import com.lukic.domain.model.ShowType
 import com.lukic.domain.model.ShowType.NOW_PLAYING
 import com.lukic.domain.model.ShowType.UPCOMING
 import java.util.concurrent.TimeUnit

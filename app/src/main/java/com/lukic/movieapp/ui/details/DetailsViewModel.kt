@@ -1,4 +1,4 @@
-package com.lukic.movieapp.ui
+package com.lukic.movieapp.ui.details
 
 import androidx.lifecycle.ViewModel
 import com.lukic.domain.model.Cast
@@ -17,12 +17,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+private const val DIVIDER = 100
+private const val CREW_SIZE_COUNT = 6
+
 class DetailsViewModel(
     private val queryMovieDetails: QueryMovieDetails,
     private val refreshMovieDetails: RefreshMovieDetails,
     private val removeFavouriteMovie: RemoveFavouriteMovie,
     private val addFavouriteMovie: AddFavouriteMovie,
-    private val movieID: Int
+    private val movieID: Int,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(MovieDetailsUIState.DEFAULT)
@@ -43,7 +46,8 @@ class DetailsViewModel(
                                 overview = overview,
                                 genres = genres,
                                 rating = rating,
-                                credits = crew,
+                                progress = (rating.toFloat() / DIVIDER),
+                                crew = if (crew.size > CREW_SIZE_COUNT) crew.take(CREW_SIZE_COUNT) else crew,
                                 releaseDate = releaseDate,
                                 duration = duration,
                                 cast = appendBaseImageToPosterPathInCast(cast),

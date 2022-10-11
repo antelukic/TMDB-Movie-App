@@ -1,4 +1,4 @@
-package com.lukic.movieapp.ui
+package com.lukic.movieapp.ui.details
 
 import com.lukic.domain.model.Cast
 import com.lukic.domain.model.Crew
@@ -8,7 +8,8 @@ data class MovieDetailsUIState(
     val overview: String,
     val genres: List<String>,
     val rating: Int,
-    val credits: List<Crew>,
+    val progress: Float,
+    val crew: List<Crew>,
     val releaseDate: String,
     val duration: String,
     val cast: List<Cast>,
@@ -21,7 +22,8 @@ data class MovieDetailsUIState(
             overview = "",
             genres = emptyList(),
             rating = 0,
-            credits = emptyList(),
+            progress = 0f,
+            crew = emptyList(),
             releaseDate = "",
             duration = "",
             cast = emptyList(),
