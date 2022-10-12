@@ -2,7 +2,7 @@ import org.gradle.api.JavaVersion
 import org.gradle.kotlin.dsl.invoke
 
 object AppConfig {
-    const val compileSdk = 32
+    const val compileSdk = 33
     const val applicationId = "com.lukic.movieapp"
     const val minSdk = 21
     const val targetSdk = 32

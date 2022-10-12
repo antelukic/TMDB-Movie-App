@@ -87,7 +87,7 @@ fun CastMember(
             Text(
                 text = castMember.name,
                 style = MaterialTheme.typography.body2,
-                color = MaterialTheme.colors.secondary,
+                color = MaterialTheme.colors.secondaryVariant,
                 modifier = Modifier
                     .padding(
                         horizontal = dimensionResource(id = R.dimen.cast_name_padding_start),

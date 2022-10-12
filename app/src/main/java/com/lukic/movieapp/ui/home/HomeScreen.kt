@@ -21,13 +21,14 @@ import com.lukic.domain.model.ShowType
 import com.lukic.movieapp.R
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
+import org.koin.androidx.compose.koinViewModel
 
 @Suppress("LongMethod")
 @Composable
 fun HomeScreen(
-    homeViewModel: HomeViewModel,
     onImageClick: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    homeViewModel: HomeViewModel = koinViewModel(),
 ) {
     val trendingState = homeViewModel.trendingUIState.collectAsState()
     val forYouState = homeViewModel.forYouUIState.collectAsState()

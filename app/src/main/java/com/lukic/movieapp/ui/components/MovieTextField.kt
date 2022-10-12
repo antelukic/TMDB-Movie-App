@@ -1,4 +1,4 @@
-package com.lukic.movieapp.utils.sharedcomposables
+package com.lukic.movieapp.ui.components
 
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material.Icon
