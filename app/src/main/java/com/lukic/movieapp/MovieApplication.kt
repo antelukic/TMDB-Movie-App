@@ -2,7 +2,11 @@ package com.lukic.movieapp
 
 import android.app.Application
 import com.lukic.data.database.databaseModule
-import com.lukic.movieapp.di.*
+import com.lukic.movieapp.di.detailsModule
+import com.lukic.movieapp.di.favouritesModule
+import com.lukic.movieapp.di.homeModule
+import com.lukic.movieapp.di.networkModule
+import com.lukic.movieapp.di.searchModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

@@ -22,6 +22,12 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
+private const val INDEX_1 = 1
+private const val INDEX_2 = 2
+private const val INDEX_3 = 3
+private const val INDEX_4 = 4
+private const val INDEX_5 = 5
+private const val INDEX_6 = 6
 private const val INDICATOR_ANIMATION_DURATION = 1000L
 
 class DetailsFragment : Fragment() {
@@ -81,8 +87,11 @@ class DetailsFragment : Fragment() {
             detailsDateText.text = movieDetails.releaseDate
             detailsGenreText.text = buildString {
                 movieDetails.genres.forEachIndexed { index, genre ->
-                    if (index == 0) append(genre)
-                    else append(", $genre")
+                    if (index == 0) {
+                        append(genre)
+                    } else {
+                        append(", $genre")
+                    }
                 }
             }
             detailsTotaltimeText.text = movieDetails.duration
@@ -91,8 +100,11 @@ class DetailsFragment : Fragment() {
 
             with(detailsFavouriteSelector) {
                 setImageResource(
-                    if (movieDetails.isFavourite) R.drawable.ic_filled_heart_with_background
-                    else R.drawable.ic_heart
+                    if (movieDetails.isFavourite) {
+                        R.drawable.ic_filled_heart_with_background
+                    } else {
+                        R.drawable.ic_heart
+                    }
                 )
                 setOnClickListener {
                     detailsViewModel.refreshFavouriteMovies()
@@ -109,27 +121,32 @@ class DetailsFragment : Fragment() {
         with(binding) {
             movieDetails.credits.forEachIndexed { index, credits ->
                 when (index) {
-                    1 -> {
+                    INDEX_1 -> {
                         detailsCreditsName1.text = credits.name
                         detailsCreditsType1.text = credits.role
                     }
-                    2 -> {
+
+                    INDEX_2 -> {
                         detailsCreditsName2.text = credits.name
                         detailsCreditsType2.text = credits.role
                     }
-                    3 -> {
+
+                    INDEX_3 -> {
                         detailsCreditsName3.text = credits.name
                         detailsCreditsType3.text = credits.role
                     }
-                    4 -> {
+
+                    INDEX_4 -> {
                         detailsCreditsName4.text = credits.name
                         detailsCreditsType4.text = credits.role
                     }
-                    5 -> {
+
+                    INDEX_5 -> {
                         detailsCreditsName5.text = credits.name
                         detailsCreditsType5.text = credits.role
                     }
-                    6 -> {
+
+                    INDEX_6 -> {
                         detailsCreditsName6.text = credits.name
                         detailsCreditsType6.text = credits.role
                     }

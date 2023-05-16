@@ -5,8 +5,16 @@ import com.lukic.domain.model.Movie
 import com.lukic.domain.usecase.QueryFavouriteMovies
 import com.lukic.domain.usecase.RemoveFavouriteMovie
 import com.lukic.movieapp.BuildConfig
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class FavouritesViewModel(
     queryFavouriteMovies: QueryFavouriteMovies,
@@ -25,7 +33,7 @@ class FavouritesViewModel(
                     movies.map { movie ->
                         FavouritesUIState(
                             movieID = movie.id,
-                            posterPath = BuildConfig.DOMAIN_BASE_IMAGE + movie.posterPath,
+                            posterPath = BuildConfig.DOMAIN_BASE_IMAGE + movie.posterPath
                         )
                     }
                 }
