@@ -10,7 +10,7 @@ import com.lukic.domain.usecase.QueryTrendingMovies
 import com.lukic.domain.usecase.RefreshDiscoverMovies
 import com.lukic.domain.usecase.RefreshForYouMovies
 import com.lukic.domain.usecase.RefreshTrendingMovies
-import com.lukic.movieapp.ui.home.HomeViewModel
+import com.lukic.movieapp.ui.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
