@@ -8,10 +8,14 @@ import com.lukic.domain.usecase.QueryMovieDetails
 import com.lukic.domain.usecase.RefreshMovieDetails
 import com.lukic.domain.usecase.RemoveFavouriteMovie
 import com.lukic.movieapp.BuildConfig
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class DetailsViewModel(
     private val queryMovieDetails: QueryMovieDetails,
@@ -55,8 +59,11 @@ class DetailsViewModel(
     fun refreshFavouriteMovies() {
         scope.launch {
             val movie = mapStateToMovie(uiState.value)
-            if (movie.isFavourite) removeFavouriteMovie(movie)
-            else addFavouriteMovie(movie = movie)
+            if (movie.isFavourite) {
+                removeFavouriteMovie(movie)
+            } else {
+                addFavouriteMovie(movie = movie)
+            }
         }
     }
 

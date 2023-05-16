@@ -4,10 +4,25 @@ import androidx.lifecycle.ViewModel
 import com.lukic.domain.model.ForYouType
 import com.lukic.domain.model.Movie
 import com.lukic.domain.model.ShowType
-import com.lukic.domain.usecase.*
+import com.lukic.domain.usecase.AddFavouriteMovie
+import com.lukic.domain.usecase.QueryDiscoverShows
+import com.lukic.domain.usecase.QueryForYouMovies
+import com.lukic.domain.usecase.QueryTrendingMovies
+import com.lukic.domain.usecase.RefreshDiscoverMovies
+import com.lukic.domain.usecase.RefreshForYouMovies
+import com.lukic.domain.usecase.RefreshTrendingMovies
+import com.lukic.domain.usecase.RemoveFavouriteMovie
 import com.lukic.movieapp.BuildConfig
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class HomeViewModel(
     queryTrendingMovies: QueryTrendingMovies,
@@ -66,8 +81,11 @@ class HomeViewModel(
     fun refreshFavouriteMovies(movieState: HomeMovieUIState) {
         scope.launch {
             val movie = mapStateToMovie(movieState)
-            if (movie.isFavourite) removeFavouriteMovie(movie)
-            else addFavouriteMovie(movie)
+            if (movie.isFavourite) {
+                removeFavouriteMovie(movie)
+            } else {
+                addFavouriteMovie(movie)
+            }
         }
     }
 

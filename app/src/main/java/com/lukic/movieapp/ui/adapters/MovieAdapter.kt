@@ -43,8 +43,11 @@ class MovieAdapter(
                 }
                 with(movieFavouritesSelector) {
                     setImageResource(
-                        if (movie.isFavourite) R.drawable.ic_filled_heart_with_background
-                        else R.drawable.ic_heart
+                        if (movie.isFavourite) {
+                            R.drawable.ic_filled_heart_with_background
+                        } else {
+                            R.drawable.ic_heart
+                        }
                     )
                     setOnClickListener {
                         onFavouriteClick(movie)

@@ -5,6 +5,8 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
 }
 
+apply(from = "$rootDir/staticAnalysis/staticAnalysis.gradle")
+
 android {
     compileSdk = AppConfig.compileSdk
 

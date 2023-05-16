@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="all">
+        <ignore path="build" />
+        <ignore path="../../.gradle" />
+    </issue>
+
+    <issue id="ContentDescription" severity="ignore" />
+    <issue id="IconLauncherShape" severity="ignore" />
+    <issue id="GradleDependency" severity="ignore" />
+    <issue id="IconLocation" severity="ignore" />
+</lint>
