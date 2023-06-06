@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
 import com.lukic.movieapp.R
-import com.lukic.movieapp.utils.sharedcomposables.MovieBox
+import com.lukic.movieapp.ui.components.MovieBox
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable

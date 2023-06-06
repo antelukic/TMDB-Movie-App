@@ -6,6 +6,8 @@ object Dependencies {
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.Android.constraintLayout}"
     const val navigationFragment = "androidx.navigation:navigation-fragment:${Versions.Android.navigation}"
     const val navigationUi = "androidx.navigation:navigation-ui:${Versions.Android.navigation}"
+    const val composeBom = "androidx.compose:compose-bom:${Versions.Compose.BOM}"
+    const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.Compose.navigation}"
 
     const val composeUi = "androidx.compose.ui:ui:${Versions.Compose.version}"
     const val composeMaterial = "androidx.compose.material:material:${Versions.Compose.version}"
@@ -31,6 +33,7 @@ object Dependencies {
 
     const val coil = "io.coil-kt:coil:${Versions.coil}"
     const val koin = "io.insert-koin:koin-android:${Versions.koin}"
+    const val koinCompose = "io.insert-koin:koin-androidx-compose:${Versions.koinCompose}"
 
     const val junit = "junit:junit:${Versions.Testing.junit}"
     const val testJunit = "androidx.test.ext:junit:${Versions.Testing.testJunit}"

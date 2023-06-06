@@ -1,4 +1,4 @@
-package com.lukic.movieapp.utils.sharedcomposables
+package com.lukic.movieapp.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -20,16 +21,23 @@ fun MovieBox(
     isFavourite: Boolean,
     onImageClick: () -> Unit,
     onFavouriteSelectorClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier) {
-        AsyncImage(
-            modifier = Modifier
-                .clickable { onImageClick() },
-            model = tmbdImage(posterPath),
-            contentDescription = stringResource(R.string.movie),
-            contentScale = ContentScale.Crop
-        )
+        val image = tmbdImage(posterPath = posterPath)
+        if (image is Painter) {
+            Image(
+                painter = image,
+                contentDescription = stringResource(R.string.movie)
+            )
+        } else {
+            AsyncImage(
+                modifier = Modifier.clickable { onImageClick() },
+                model = image,
+                contentDescription = stringResource(R.string.movie),
+                contentScale = ContentScale.Crop
+            )
+        }
         Image(
             modifier = Modifier
                 .padding(dimensionResource(id = R.dimen.image_margin_all))

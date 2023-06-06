@@ -5,9 +5,9 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [DbMovie::class],
-    version = 2
+    version = 2,
+    exportSchema = false
 )
-
 abstract class MovieDatabase : RoomDatabase() {
     abstract val dao: MovieDao
 }

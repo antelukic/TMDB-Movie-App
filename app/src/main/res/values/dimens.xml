@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="header_top_margin">32dp</dimen>
-    <dimen name="header_bottom_margin">8dp</dimen>
     <dimen name="common_text_padding_all">20dp</dimen>
     <dimen name="common_card_radius">10dp</dimen>
     <dimen name="text_billed_cast_margin_top">40dp</dimen>
@@ -20,7 +18,7 @@
     <dimen name="cast_card_width">140dp</dimen>
     <dimen name="cast_image_height">156dp</dimen>
     <dimen name="cast_card_elevation">4dp</dimen>
-    <dimen name="cast_card_height">268dp</dimen>
+    <dimen name="cast_card_height">238dp</dimen>
     <dimen name="details_cast_rv_margin_start">4dp</dimen>
     <dimen name="home_text_margin_top">44dp</dimen>
     <dimen name="cast_name_padding_start">8dp</dimen>
@@ -53,4 +51,10 @@
     <dimen name="crew_column_spaced_by">24dp</dimen>
     <dimen name="details_crew_top_padding">20dp</dimen>
     <dimen name="crew_row_spaced_by">20dp</dimen>
+    <dimen name="bottom_nav_icon_padding">12dp</dimen>
+    <dimen name="spacer_width_bottom_nav">12dp</dimen>
+    <dimen name="header_height">60dp</dimen>
+    <dimen name="tmdb_logo_width">200dp</dimen>
+    <dimen name="tmdb_logo_height">48dp</dimen>
+    <dimen name="arrow_back_size">48dp</dimen>
 </resources>
