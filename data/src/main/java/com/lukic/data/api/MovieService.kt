@@ -1,6 +1,10 @@
 package com.lukic.data.api
 
-import com.lukic.data.api.model.*
+import com.lukic.data.api.model.ApiCastAndCrew
+import com.lukic.data.api.model.ApiMovieDetails
+import com.lukic.data.api.model.ApiMovies
+import com.lukic.data.api.model.ForYouApi
+import com.lukic.data.api.model.ShowTypeApi
 
 interface MovieService {
 

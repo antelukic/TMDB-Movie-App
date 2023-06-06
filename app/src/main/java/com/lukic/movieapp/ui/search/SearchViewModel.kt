@@ -1,4 +1,4 @@
-package com.lukic.movieapp.ui
+package com.lukic.movieapp.ui.search
 
 import androidx.lifecycle.ViewModel
 import com.lukic.domain.model.Movie
@@ -13,6 +13,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -30,6 +31,9 @@ class SearchViewModel(
     private val _uiState = MutableStateFlow<List<SearchUIState>>(emptyList())
     val uiState: StateFlow<List<SearchUIState>> get() = _uiState
 
+    private val _searchText = MutableStateFlow("")
+    val searchText get() = _searchText.asStateFlow()
+
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     private val searchQueryPublisher = MutableSharedFlow<String>()
@@ -37,6 +41,7 @@ class SearchViewModel(
     init {
         scope.launch {
             searchQueryPublisher
+                .onEach { query -> _searchText.update { query } }
                 .debounce(SEARCH_DEBOUNCE_TIME)
                 .collect { query ->
                     if (query.isNotEmpty()) {
