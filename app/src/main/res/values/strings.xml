@@ -14,11 +14,12 @@
     <string name="for_you">For You</string>
     <string name="now_playing">Now Playing</string>
     <string name="upcoming">Upcoming</string>
-    <string name="home">Home</string>
     <string name="favourites">Favourites</string>
     <string name="movie">Movie</string>
     <string name="movie_favourite_selector">Movie favourite selector</string>
     <string name="clear_search_content_description">Clear search</string>
     <string name="movie_image">Movie image</string>
     <string name="cast_member">Cast member</string>
+    <string name="tmdb_logo">The Movie Database Logo</string>
+    <string name="navigate_back">Navigate back</string>
 </resources>

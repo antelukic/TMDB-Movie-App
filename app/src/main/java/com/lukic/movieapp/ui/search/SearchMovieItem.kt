@@ -1,5 +1,6 @@
 package com.lukic.movieapp.ui.search
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -35,7 +37,7 @@ fun SearchMovieItem(
     descriptionTextColor: Color = MaterialTheme.colors.secondaryVariant,
     descriptionMaxLines: Int = 5,
     textOverflow: TextOverflow = TextOverflow.Ellipsis,
-    cardElevation: Dp = 0.dp
+    cardElevation: Dp = 0.dp,
 ) {
     Card(
         modifier = modifier
@@ -43,16 +45,24 @@ fun SearchMovieItem(
         elevation = cardElevation
     ) {
         Row {
-            AsyncImage(
-                model = tmbdImage(posterPath = movie.posterPath),
-                contentDescription = stringResource(id = R.string.movie_image),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(
-                        width = dimensionResource(id = R.dimen.search_image_width),
-                        height = dimensionResource(id = R.dimen.search_image_height)
-                    )
-            )
+            val image = tmbdImage(posterPath = movie.posterPath)
+            if (image is Painter) {
+                Image(
+                    painter = image,
+                    contentDescription = stringResource(id = R.string.movie_image)
+                )
+            } else {
+                AsyncImage(
+                    model = image,
+                    contentDescription = stringResource(id = R.string.movie_image),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(
+                            width = dimensionResource(id = R.dimen.search_image_width),
+                            height = dimensionResource(id = R.dimen.search_image_height)
+                        )
+                )
+            }
             Box {
                 Column {
                     Text(

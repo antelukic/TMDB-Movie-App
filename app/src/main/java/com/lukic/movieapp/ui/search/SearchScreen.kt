@@ -13,13 +13,14 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.lukic.movieapp.R
-import com.lukic.movieapp.utils.sharedcomposables.MovieTextField
+import com.lukic.movieapp.ui.components.MovieTextField
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SearchScreen(
-    searchViewModel: SearchViewModel,
     onItemClick: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    searchViewModel: SearchViewModel = koinViewModel()
 ) {
     val searchText = searchViewModel.searchText.collectAsState()
     val searchUIState = searchViewModel.uiState.collectAsState()
