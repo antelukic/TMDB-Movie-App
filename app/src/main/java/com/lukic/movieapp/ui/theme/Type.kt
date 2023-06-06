@@ -14,6 +14,11 @@ private val ProximaNova = FontFamily(
 )
 
 val MovieTypography = Typography(
+    h5 = TextStyle(
+        fontFamily = ProximaNova,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp
+    ),
     h6 = TextStyle(
         fontFamily = ProximaNova,
         fontWeight = FontWeight.Bold,

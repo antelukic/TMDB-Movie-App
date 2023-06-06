@@ -1,6 +1,5 @@
 package com.lukic.movieapp.ui.search
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -22,7 +20,7 @@ import com.lukic.movieapp.utils.tmbdImage
 fun GradientImageWithContent(
     imagePosterPath: String,
     content: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     Column {
         Box(
@@ -30,20 +28,12 @@ fun GradientImageWithContent(
                 .fillMaxWidth()
                 .height(dimensionResource(id = R.dimen.details_image_height))
         ) {
-            val image = tmbdImage(posterPath = imagePosterPath)
-            if (image is Painter) {
-                Image(
-                    painter = image,
-                    contentDescription = stringResource(id = R.string.movie_image)
-                )
-            } else {
-                AsyncImage(
-                    model = image,
-                    contentDescription = stringResource(id = R.string.movie_image),
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.matchParentSize()
-                )
-            }
+            AsyncImage(
+                model = tmbdImage(posterPath = imagePosterPath),
+                contentDescription = stringResource(id = R.string.movie_image),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.matchParentSize()
+            )
             Box(
                 modifier = Modifier
                     .matchParentSize()
