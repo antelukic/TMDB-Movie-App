@@ -7,7 +7,6 @@
     <string name="user_score">User Score</string>
     <string name="overview">Overview</string>
     <string name="top_billed_cast">Top Billed Cast</string>
-    <string name="full_cast_amp_crew">Full cast &amp; crew</string>
     <string name="movie_rating">%1$s%%</string>
     <string name="discover">Discover</string>
     <string name="popular">Popular</string>
@@ -15,8 +14,12 @@
     <string name="for_you">For You</string>
     <string name="now_playing">Now Playing</string>
     <string name="upcoming">Upcoming</string>
-    <string name="home">Home</string>
     <string name="favourites">Favourites</string>
-    <string name="tmbd_logo">TMBD logo</string>
-    <string name="favourite_movie_selector">Favourite movie selector</string>
+    <string name="movie">Movie</string>
+    <string name="movie_favourite_selector">Movie favourite selector</string>
+    <string name="clear_search_content_description">Clear search</string>
+    <string name="movie_image">Movie image</string>
+    <string name="cast_member">Cast member</string>
+    <string name="tmdb_logo">The Movie Database Logo</string>
+    <string name="navigate_back">Navigate back</string>
 </resources>

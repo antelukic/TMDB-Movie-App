@@ -1,0 +1,12 @@
+apply from: "$rootDir/staticAnalysis/lint/lint.gradle"
+apply from: "$rootDir/staticAnalysis/detekt/detekt.gradle"
+apply from: "$rootDir/staticAnalysis/ktlint/ktlint.gradle"
+
+task staticAnalysis {
+    group "verification"
+    description "Generate StaticAnalysis reports."
+
+    dependsOn "ktlint"
+    dependsOn "lint"
+    dependsOn "detekt"
+}
