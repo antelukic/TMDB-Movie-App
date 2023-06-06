@@ -1,8 +1,16 @@
 package com.lukic.data.mapper
 
-import com.lukic.data.api.model.*
+import com.lukic.data.api.model.ApiCastAndCrew
+import com.lukic.data.api.model.ApiMovie
+import com.lukic.data.api.model.ApiMovieDetails
+import com.lukic.data.api.model.ForYouApi
+import com.lukic.data.api.model.ShowTypeApi
 import com.lukic.data.database.DbMovie
-import com.lukic.domain.model.*
+import com.lukic.domain.model.Cast
+import com.lukic.domain.model.Crew
+import com.lukic.domain.model.ForYouType
+import com.lukic.domain.model.Movie
+import com.lukic.domain.model.ShowType
 
 interface MovieMapper {
 

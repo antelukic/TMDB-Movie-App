@@ -7,7 +7,6 @@
     <string name="user_score">User Score</string>
     <string name="overview">Overview</string>
     <string name="top_billed_cast">Top Billed Cast</string>
-    <string name="full_cast_amp_crew">Full cast &amp; crew</string>
     <string name="movie_rating">%1$s%%</string>
     <string name="discover">Discover</string>
     <string name="popular">Popular</string>
@@ -21,4 +20,5 @@
     <string name="movie_favourite_selector">Movie favourite selector</string>
     <string name="clear_search_content_description">Clear search</string>
     <string name="movie_image">Movie image</string>
+    <string name="cast_member">Cast member</string>
 </resources>

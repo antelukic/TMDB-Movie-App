@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.lukic.movieapp.R
-import com.lukic.movieapp.utils.movieImage
+import com.lukic.movieapp.utils.tmbdImage
 
 @Composable
 fun SearchMovieItem(
@@ -44,7 +44,7 @@ fun SearchMovieItem(
     ) {
         Row {
             AsyncImage(
-                model = movieImage(posterPath = movie.posterPath),
+                model = tmbdImage(posterPath = movie.posterPath),
                 contentDescription = stringResource(id = R.string.movie_image),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

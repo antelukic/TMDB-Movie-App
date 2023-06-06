@@ -12,7 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
 import com.lukic.movieapp.R
-import com.lukic.movieapp.utils.movieImage
+import com.lukic.movieapp.utils.tmbdImage
 
 @Composable
 fun MovieBox(
@@ -26,7 +26,7 @@ fun MovieBox(
         AsyncImage(
             modifier = Modifier
                 .clickable { onImageClick() },
-            model = movieImage(posterPath),
+            model = tmbdImage(posterPath),
             contentDescription = stringResource(R.string.movie),
             contentScale = ContentScale.Crop
         )

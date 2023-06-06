@@ -7,7 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.lukic.movieapp.databinding.ActivityMainBinding
-import com.lukic.movieapp.ui.DetailsFragment
+import com.lukic.movieapp.ui.details.DetailsFragment
 
 const val MOVIE_ID_KEY = "movieId"
 
