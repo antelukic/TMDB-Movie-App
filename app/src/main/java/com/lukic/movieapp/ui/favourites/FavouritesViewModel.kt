@@ -1,4 +1,4 @@
-package com.lukic.movieapp.ui
+package com.lukic.movieapp.ui.favourites
 
 import androidx.lifecycle.ViewModel
 import com.lukic.domain.model.Movie

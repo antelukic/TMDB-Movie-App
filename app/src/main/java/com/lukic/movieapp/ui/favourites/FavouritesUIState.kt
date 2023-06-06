@@ -1,4 +1,4 @@
-package com.lukic.movieapp.ui
+package com.lukic.movieapp.ui.favourites
 
 data class FavouritesUIState(
     val movieID: Int,

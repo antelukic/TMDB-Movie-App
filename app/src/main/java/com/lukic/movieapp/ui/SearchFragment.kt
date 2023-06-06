@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.lukic.movieapp.MOVIE_ID_KEY
 import com.lukic.movieapp.databinding.FragmentSearchBinding
 import com.lukic.movieapp.ui.adapters.SearchAdapter
 import kotlinx.coroutines.launch
@@ -30,11 +31,7 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
 
         searchAdapter = SearchAdapter { movieId ->
-            findNavController().navigate(
-                SearchFragmentDirections.actionSearchFragmentToDetailsFragment2(
-                    movieId
-                )
-            )
+            findNavController().previousBackStackEntry?.savedStateHandle?.set(MOVIE_ID_KEY, movieId)
         }
 
         with(binding) {

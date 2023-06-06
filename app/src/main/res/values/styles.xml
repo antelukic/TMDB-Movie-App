@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
-        <item name="textAllCaps">false</item>
-        <item name="android:textColor">@color/dark_blue_primary</item>
-        <item name="android:textSize">@dimen/tab_text_size</item>
-        <item name="fontFamily">@font/nunito_sans_bold</item>
-        <item name="android:includeFontPadding">false</item>
-    </style>
-
-    <style name="RoundedImageView">
-        <item name="cornerSizeTopLeft">@dimen/common_card_radius</item>
-        <item name="cornerFamilyTopLeft">rounded</item>
-        <item name="cornerSizeBottomRight">@dimen/common_card_radius</item>
-        <item name="cornerFamilyBottomRight">rounded</item>
-        <item name="cornerSizeBottomLeft">@dimen/common_card_radius</item>
-        <item name="cornerFamilyBottomLeft">rounded</item>
-        <item name="cornerSizeTopRight">@dimen/common_card_radius</item>
-        <item name="cornerFamilyTopRight">rounded</item>
-    </style>
-
     <style name="TextInputLayoutAppearance" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="colorControlNormal">@color/dark_blue_primary</item>
         <item name="colorControlActivated">@color/dark_blue_primary</item>

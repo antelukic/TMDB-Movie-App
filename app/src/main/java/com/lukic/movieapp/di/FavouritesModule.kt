@@ -3,7 +3,7 @@ package com.lukic.movieapp.di
 import com.lukic.domain.usecase.AddFavouriteMovie
 import com.lukic.domain.usecase.QueryFavouriteMovies
 import com.lukic.domain.usecase.RemoveFavouriteMovie
-import com.lukic.movieapp.ui.FavouritesViewModel
+import com.lukic.movieapp.ui.favourites.FavouritesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
