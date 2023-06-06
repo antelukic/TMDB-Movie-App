@@ -22,14 +22,11 @@ object Versions {
     object Compose {
         const val version = "1.2.1"
         const val coil = "2.2.1"
-        const val BOM = "2022.10.00"
-        const val navigation = "2.5.3"
     }
 
     const val ktor = "2.1.0"
     const val serialization = "1.4.0"
     const val room = "2.4.3"
     const val coil = "2.2.0"
-    const val koin = "3.4.2"
-    const val koinCompose = "3.4.5"
+    const val koin = "3.1.0"
 }

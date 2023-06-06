@@ -9,19 +9,13 @@ import androidx.compose.ui.unit.sp
 import com.lukic.movieapp.R
 
 private val ProximaNova = FontFamily(
-    Font(R.font.proxima_nova_alt_bold, FontWeight.Bold),
-    Font(R.font.proxima_nova_regular, FontWeight.Normal)
+    Font(R.font.proxima_nova_alt_bold, FontWeight.Bold)
 )
 
 val MovieTypography = Typography(
-    h5 = TextStyle(
-        fontFamily = ProximaNova,
-        fontWeight = FontWeight.Bold,
-        fontSize = 24.sp
-    ),
     h6 = TextStyle(
         fontFamily = ProximaNova,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.W600,
         fontSize = 20.sp
     ),
     body1 = TextStyle(
@@ -31,7 +25,6 @@ val MovieTypography = Typography(
     ),
     body2 = TextStyle(
         fontFamily = ProximaNova,
-        fontSize = 12.sp,
-        fontWeight = FontWeight.Normal
+        fontSize = 12.sp
     )
 )

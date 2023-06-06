@@ -49,22 +49,23 @@ android {
 }
 
 dependencies {
+
     implementation(Dependencies.androidCore)
     implementation(Dependencies.appCompat)
     implementation(Dependencies.material)
     implementation(Dependencies.constraintLayout)
     implementation(Dependencies.navigationFragment)
     implementation(Dependencies.navigationUi)
-    implementation(Dependencies.composeBom)
-    implementation(Dependencies.composeNavigation)
-    implementation(Dependencies.composeMaterial)
 
+    implementation(Dependencies.composeUi)
+    implementation(Dependencies.composeMaterial)
+    implementation(Dependencies.composeToolingPreview)
     implementation(Dependencies.immutableCollections)
 
     implementation(Dependencies.composeCoil)
     implementation(Dependencies.coil)
 
-    implementation(Dependencies.koinCompose)
+    implementation(Dependencies.koin)
 
     implementation(project(AppConfig.domainModule))
     implementation(project(AppConfig.dataModule))
