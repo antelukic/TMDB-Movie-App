@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "MovieApp"
+rootProject.name = "Movie4YU"
 include(":app")
 include(":domain")
 include(":data")
