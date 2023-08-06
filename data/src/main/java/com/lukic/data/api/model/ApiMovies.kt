@@ -1,7 +1,10 @@
 package com.lukic.data.api.model
 
+import com.lukic.data.database.DbMovie
+import com.lukic.domain.model.Movie
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.math.roundToInt
 
 @Serializable
 data class ApiMovies(
@@ -26,3 +29,25 @@ data class ApiMovie(
     @SerialName("release_date")
     val releaseDate: String? = null
 )
+
+const val RATING_FACTOR = 10
+const val EMPTY = ""
+
+fun List<ApiMovie>?.toMovies(favouriteMovies: List<DbMovie>?) =
+    this?.map { apiMovie ->
+        with(apiMovie) {
+            Movie(
+                id = this.id,
+                title = title,
+                overview = overview,
+                rating = (voteAverage * RATING_FACTOR).roundToInt(),
+                genres = emptyList(),
+                releaseDate = releaseDate.orEmpty(),
+                duration = EMPTY,
+                cast = emptyList(),
+                posterPath = posterPath.orEmpty(),
+                crew = emptyList(),
+                isFavourite = favouriteMovies?.firstOrNull { it.id == id } != null
+            )
+        }
+    } ?: emptyList()
